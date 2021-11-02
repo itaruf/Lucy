@@ -8,7 +8,7 @@ public class TimerManager : MonoBehaviour
     public float seconds;
     public TextMeshProUGUI timerText;
     public string textBeforeNumb = "";
-    [HideInInspector]public bool timerPlay = true;
+    [HideInInspector]public bool timerPlay = false;
 
     public static TimerManager Instance;
 
@@ -47,8 +47,7 @@ public class TimerManager : MonoBehaviour
         {
             timerPlay = false;
 
-            //Action
-
+            GameManager.Instance.gamesToLoad[GameManager.Instance.oldGameLoaded].TimerEnd();
             return;
         }
     }

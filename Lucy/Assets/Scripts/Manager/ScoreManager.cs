@@ -33,7 +33,7 @@ public class ScoreManager : MonoBehaviour
         PlayerData playerData = GameManager.Instance.players[playerNum];
 
         playerData.playerScore += scoreToAdd;
-        playersScoreText[playerNum].text = playerData.playerName + playerData.playerScore.ToString();
+        playersScoreText[playerNum].text = "Player " + (playerData.playerId+1).ToString() + " - " + playerData.playerName + playerData.playerScore.ToString();
         playersScoreText[playerNum].color = playerData.playerColor;
     }
 
@@ -44,7 +44,7 @@ public class ScoreManager : MonoBehaviour
             PlayerData playerData = GameManager.Instance.players[i];
 
             playerData.playerScore += scoreToAdd;
-            playersScoreText[i].text = playerData.playerName + " : " + playerData.playerScore.ToString();
+            playersScoreText[i].text = "Player " + (playerData.playerId).ToString() + " - " + playerData.playerName + " : " + playerData.playerScore.ToString();
             playersScoreText[i].color = playerData.playerColor;
         }
     }

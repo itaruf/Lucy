@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public PlayerData[] players;
     public MiniGame[] gamesToLoad;
-    int oldGameLoaded = -1;
+    [HideInInspector]public int oldGameLoaded = -1;
 
     public static GameManager Instance;
 

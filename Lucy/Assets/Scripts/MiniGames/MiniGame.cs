@@ -8,6 +8,7 @@ public abstract class MiniGame : MonoBehaviour
     {
         scoreFromScore,
         scoreFromRank,
+        noScore,
     }
 
     public HowToScore howToScore;
@@ -23,29 +24,21 @@ public abstract class MiniGame : MonoBehaviour
         {
             TimerManager.Instance.minutes = minutes;
             TimerManager.Instance.seconds = seconds;
+            TimerManager.Instance.timerPlay = true;
         }
         LaunchGame();
     }
 
     void Update()
     {
-        if (InputManager.Instance.IsPlayerPressing(1, "Red"))
-        {
-            //UNIQUEMENT LE JOUEUR 1 MAIS LA COULEUR ROUGE
-        }
-        if (InputManager.Instance.IsPlayerPressing("Blue"))
-        {
-            //N'IMPORTE QUEL JOUEUR QUI APPUIE SUR LA COULEUR BLEUE
-        }
+       
     }
 
     protected abstract void LaunchGame();
+    public abstract void TimerEnd();
 
     public virtual void GameEnd()
     {
-        if(howToScore == HowToScore.scoreFromRank)
-        {
-            //Score par classement
-        }
+        
     }
 }

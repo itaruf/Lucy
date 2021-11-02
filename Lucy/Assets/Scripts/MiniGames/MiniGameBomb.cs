@@ -6,6 +6,10 @@ public class MiniGameBomb : MiniGame
 {
     protected override void LaunchGame()
     {
-        Debug.Log("Hey");
+
+    }
+    public override void TimerEnd()
+    {
+
     }
 }
