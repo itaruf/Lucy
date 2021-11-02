@@ -4,6 +4,13 @@ using UnityEngine;
 
 public abstract class MiniGame : MonoBehaviour
 {
+    public string miniGameName;
+    public HowToScore howToScore;
+
+    [Header("SetTimer")]
+    public bool timerNeeded = true;
+    public int minutes = 1;
+    public int seconds = 30;
     public enum HowToScore
     {
         scoreFromScore,
@@ -11,12 +18,6 @@ public abstract class MiniGame : MonoBehaviour
         noScore,
     }
 
-    public HowToScore howToScore;
-
-    [Header("SetTimer")]
-    public bool timerNeeded = true;
-    public int minutes = 1;
-    public int seconds = 30;
 
     void OnEnable()
     {

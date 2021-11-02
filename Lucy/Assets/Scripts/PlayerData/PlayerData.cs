@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPlayerData", menuName = "PlayerData")]
-
 public class PlayerData : ScriptableObject
 {
     [Header("Initialize")]
@@ -12,5 +11,4 @@ public class PlayerData : ScriptableObject
     public string playerName;
     public int playerScore;
     public Color playerColor;
-
 }
