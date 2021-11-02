@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombGame : MonoBehaviour
+public class MiniGameBomb : MonoBehaviour
 {
     void OnEnable()
     {
@@ -11,6 +11,6 @@ public class BombGame : MonoBehaviour
 
     void LaunchGame()
     {
-
+        
     }
 }
