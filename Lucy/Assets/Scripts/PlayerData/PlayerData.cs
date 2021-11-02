@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+[CreateAssetMenu(fileName = "NewPlayerData", menuName = "PlayerData")]
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public class PlayerData : ScriptableObject
+{
+    [Header("Initialize")]
+    public int playerId;
+    [Header("Players stats")]
+    public string playerName;
+    public int playerScore;
+    public Color playerColor;
 }

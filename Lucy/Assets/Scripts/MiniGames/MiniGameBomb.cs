@@ -2,15 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGameBomb : MonoBehaviour
+public class MiniGameBomb : MiniGame
 {
-    void OnEnable()
+    protected override void LaunchGame()
     {
-        LaunchGame();
-    }
-
-    void LaunchGame()
-    {
-        
+        Debug.Log("Hey");
     }
 }
