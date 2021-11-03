@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Uduino;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +36,14 @@ public class GameManager : MonoBehaviour
         LoadGame(0);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartScene();
+        }
+    }
+
     public void LoadGame(int indexLoadGame)
     {
         miniGameTxt.text = gamesToLoad[indexLoadGame].miniGameName;
@@ -42,5 +51,14 @@ public class GameManager : MonoBehaviour
             gamesToLoad[oldGameLoaded].gameObject.SetActive(false);
         gamesToLoad[indexLoadGame].gameObject.SetActive(true);
         oldGameLoaded = indexLoadGame;
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void LaunchScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
     }
 }

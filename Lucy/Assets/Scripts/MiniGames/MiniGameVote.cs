@@ -12,6 +12,7 @@ public class MiniGameVote : MiniGame
     protected override void LaunchGame()
     {
         canVote = true;
+        TimerManager.Instance.timerPlay = true;
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
             voteFor.Add(0);

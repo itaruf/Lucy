@@ -21,11 +21,12 @@ public abstract class MiniGame : MonoBehaviour
 
     void OnEnable()
     {
+        TimerManager.Instance.timerPlay = false;
         if (timerNeeded)
         {
             TimerManager.Instance.minutes = minutes;
             TimerManager.Instance.seconds = seconds;
-            TimerManager.Instance.timerPlay = true;
+            TimerManager.Instance.SetText();
         }
         LaunchGame();
     }
