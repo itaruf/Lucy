@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
         Score(0);
     }
 
-    public void Score(int playerNum, int scoreToAdd)
+    public void AddScore(int playerNum, int scoreToAdd)
     {
         PlayerData playerData = GameManager.Instance.players[playerNum];
 

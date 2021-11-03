@@ -19,8 +19,6 @@ public class DialogManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
-        PlayDialog("ManSpeaking");
     }
     public void PlayDialog(string name)
     {

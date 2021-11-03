@@ -50,5 +50,7 @@ public class MiniGameBomb : MiniGame
             Debug.Log("Bomb is not on player so no one die");
             //NoOne die
         }
+
+
     }
 }

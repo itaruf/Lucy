@@ -22,6 +22,8 @@ public abstract class MiniGame : MonoBehaviour
     void OnEnable()
     {
         TimerManager.Instance.timerPlay = false;
+        TimerManager.Instance.timerText.text = "";
+        TimerManager.Instance.gameObject.SetActive(timerNeeded);
         if (timerNeeded)
         {
             TimerManager.Instance.minutes = minutes;

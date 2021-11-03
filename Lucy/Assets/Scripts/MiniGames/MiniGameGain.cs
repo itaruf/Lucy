@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MiniGameGain : MiniGame
 {
     public int[] numbersToReach;
-    public int delayBeforeChangeNumber;
+    public float delayBeforeChangeNumber;
     public List<int> playersScore = new List<int>(4);
     int actualIndex = -1;
     bool canPress;
     int total;
     public float delay = 0.5f;
 
+    public TextMeshProUGUI rulesText;
+
     int lastPlayerWhoPressed;
+    bool imChecking = false;
 
     protected override void LaunchGame()
     {
         canPress = true;
+        ChangeIndex();
     }
 
     public override void TimerEnd()
@@ -28,57 +33,51 @@ public class MiniGameGain : MiniGame
     {
         if (canPress)
         {
-            if (InputManager.Instance.IsPlayerPressing(1, "Red") || InputManager.Instance.IsPlayerPressing(1, "Blue"))
+            for (int i = 0; i < playersScore.Count; i++)
             {
-                playersScore[0]++;
-                lastPlayerWhoPressed = 1;
-            }
-            if (InputManager.Instance.IsPlayerPressing(2, "Red") || InputManager.Instance.IsPlayerPressing(2, "Blue"))
-            {
-                playersScore[1]++;
-                lastPlayerWhoPressed = 2;
-
-            }
-            if (InputManager.Instance.IsPlayerPressing(3, "Red") || InputManager.Instance.IsPlayerPressing(3, "Blue"))
-            {
-                playersScore[2]++;
-                lastPlayerWhoPressed = 3;
-
-            }
-            if (InputManager.Instance.IsPlayerPressing(4, "Red") || InputManager.Instance.IsPlayerPressing(4, "Blue"))
-            {
-                playersScore[3]++;
-                lastPlayerWhoPressed = 4;
-
+                if (InputManager.Instance.IsPlayerPressing(i+1, "Red") || InputManager.Instance.IsPlayerPressing(i+1, "Blue"))
+                {
+                    playersScore[i]++;
+                    lastPlayerWhoPressed = i+1;
+                    CheckScore();
+                }
             }
         }
+    }
+
+    void CheckScore()
+    {
         total = 0;
         for (int i = 0; i < playersScore.Count; i++)
         {
             total += playersScore[i];
         }
 
-        if(total == playersScore[actualIndex])
+        if (!imChecking)
         {
-            WaitForTotal();
+            if (total == numbersToReach[actualIndex])
+            {
+                StartCoroutine(WaitForTotal());
+            }
         }
     }
 
     IEnumerator WaitForTotal()
     {
+        imChecking = true;
         yield return new WaitForSeconds(delayBeforeChangeNumber);
         CompareEnd();
     }
 
     void CompareEnd()
     {
-        if(total == playersScore[actualIndex])
+        if (total == playersScore[actualIndex])
         {
             Debug.Log("Tout le monde gagne");
         }
         else
         {
-            Debug.Log("Le joueur " + (lastPlayerWhoPressed+1) + " a perdu");
+            Debug.Log("Le joueur " + (lastPlayerWhoPressed + 1) + " a perdu");
         }
         ChangeIndex();
     }
@@ -86,5 +85,22 @@ public class MiniGameGain : MiniGame
     void ChangeIndex()
     {
         actualIndex++;
+        ChangeNumText(rulesText, "You have to reach " + numbersToReach[actualIndex].ToString());
+
+        for (int i = 0; i < playersScore.Count; i++)
+        {
+            ScoreManager.Instance.AddScore(i, playersScore[i]);
+        }
+
+        if (actualIndex == playersScore.Count)
+        {
+            canPress = false;
+            GameEnd();
+        }
+    }
+
+    void ChangeNumText(TextMeshProUGUI textToChange, string text)
+    {
+        textToChange.text = text;
     }
 }
