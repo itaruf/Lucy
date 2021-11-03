@@ -1158,6 +1158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819553211}
+  - component: {fileID: 819553212}
   m_Layer: 0
   m_Name: GainGame
   m_TagString: Untagged
@@ -1179,6 +1180,27 @@ Transform:
   m_Father: {fileID: 1946406919}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &819553212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819553210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bffe0e7414cfa844a4f1f6cab3dd6c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miniGameName: 
+  howToScore: 0
+  timerNeeded: 1
+  minutes: 1
+  seconds: 30
+  numbersToReach: 040000000800000008000000
+  delayBeforeChangeNumber: 0
+  playersScore: 00000000000000000000000000000000
+  delay: 0.5
 --- !u!1 &1006237450
 GameObject:
   m_ObjectHideFlags: 0
@@ -3761,7 +3783,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec584b4fd6e1e2c4e8ac5d4fa552811d, type: 2}
   - {fileID: 11400000, guid: 31e15719029a42f4c9ff807c72f6fbfd, type: 2}
   gamesToLoad:
-  - {fileID: 1554251917}
+  - {fileID: 819553212}
   oldGameLoaded: -1
   miniGameTxt: {fileID: 1907113636}
 --- !u!4 &2068965580
