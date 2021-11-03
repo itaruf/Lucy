@@ -304,6 +304,56 @@ Transform:
   m_Father: {fileID: 333725194}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &69673727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69673728}
+  - component: {fileID: 69673729}
+  m_Layer: 0
+  m_Name: DialogManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69673728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69673727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 333725194}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &69673729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69673727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e54bf6dad0cb6f45b716712b0022c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - name: ManSpeaking
+    clip: {fileID: 8300000, guid: 35e071cdce87ad445b3c9c19a9324f63, type: 3}
+    volume: 1
+    dialogToReadAfter: 
+    delayBeforeNextClip: 0.3
+  soundPrefab: {fileID: 3862785304920429047, guid: 203d6fd096be5624eb1be7ce830d2029, type: 3}
 --- !u!1 &333725193
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +385,7 @@ Transform:
   - {fileID: 53462688}
   - {fileID: 1334875435}
   - {fileID: 382928560}
+  - {fileID: 69673728}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
