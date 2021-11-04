@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGamePrisonersDilema : MonoBehaviour
+public class MiniGamePrisonersDilema : MiniGame
 {
     public class BehaviorScores
     {
@@ -19,7 +19,10 @@ public class MiniGamePrisonersDilema : MonoBehaviour
     [Header("Chrono")]
     public float timerToThink = 0f;
     public float timerBeforeStartingNewRound = 0f;
-    private bool hasRoundStarted = false;
+    private float initialTimerToThink = 0f;
+    private float initialTimerBeforeStarting = 0f;
+    private bool canVote = true;
+    private bool hasRoundStarted = true;
 
     public Dictionary<int, bool> playersCurrentRoundActions = new Dictionary<int, bool>(4); // <ID du joueur, action jouée : trahison = true,, coopération = false>
     public Dictionary<int, bool> playersPreviousRoundActions = new Dictionary<int, bool>(4);
@@ -61,8 +64,8 @@ public class MiniGamePrisonersDilema : MonoBehaviour
     private List<int> _betrayOutcomesPoints = new List<int>(4);
 
     // Permet de déterminer les cas dans lesquels nous sommes au tour actuel
-    private int _numberOfBetrayers = 0;
-    private int _numberOfCoops = 0;
+    public int _numberOfBetrayers = 0;
+    public int _numberOfCoops = 0;
 
     // Permet de déterminer les cas dans lesquels nous étions au tour précédent
     private int _previousNumberOfBetrayers = 0;
@@ -81,11 +84,15 @@ public class MiniGamePrisonersDilema : MonoBehaviour
     public int coopFighterPoints = 0;
     public int coopFighterHardPoints = 0;
 
+    private Coroutine waitForPlayersInput;
+    private Coroutine delayNextRound;
+
     void Start()
     {
         // Initialisation de l'état de base des joueurs
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
+            GameManager.Instance.players[i].playerScore = 0;
             playersPreviousRoundActions.Add(i + 1, false);
             playersCurrentRoundActions.Add(i + 1, false);
             playerBehaviorScore.Add(i + 1, new BehaviorScores { coopScore = 0, betrayScore = 0 });
@@ -125,14 +132,8 @@ public class MiniGamePrisonersDilema : MonoBehaviour
         _coopOutcomes.AddRange(coopArray);
         _betrayOutcomes.AddRange(betrayArray);
 
-        // On commence la manche
-        hasRoundStarted = true;
-
-        ChooseAction();
-        DetermineBehaviorScoresToEnable();
-        DeterminePlayerScore();
-
-        SetupVariables();
+        initialTimerToThink = timerToThink;
+        initialTimerBeforeStarting = timerBeforeStartingNewRound;
     }
 
     void Update()
@@ -140,15 +141,15 @@ public class MiniGamePrisonersDilema : MonoBehaviour
         betrayScore = behaviorScoresGlobal.betrayScore;
         coopScore = behaviorScoresGlobal.coopScore;
 
-        if (!hasRoundStarted)
+        for (int i = 0; i < numberOfRounds; i++)
         {
-            hasRoundStarted = !hasRoundStarted;
-            ChooseAction();
-            //StartCoroutine(RoundTimer());
+            Debug.Log("Is vote enabled : " + canVote);
+            if (canVote)
+            {
+                ChooseAction(); // Les joueurs font leur choix d'action pour un tour donné sur une fenêtre de temps
+                StartCoroutine(WaitingForPlayersInput());
+            }
         }
-
-        if (!TimerManager.Instance.timerPlay)
-            TimerManager.Instance.timerPlay = true;
     }
 
     void SetupVariables()
@@ -169,18 +170,21 @@ public class MiniGamePrisonersDilema : MonoBehaviour
 
     void ChooseAction() // Choisir de trahir ou non
     {
+        Debug.Log("Choose Action");
         InputManager input = InputManager.Instance;
 
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
             if (input.IsPlayerPressing(i + 1, "Red"))
             {
+                Debug.Log($"playerid {i + 1} chooses to betray");
                 playersCurrentRoundActions[i + 1] = true; // Le joueur trahit
             }
 
             if (input.IsPlayerPressing(i + 1, "Blue"))
             {
-                playersCurrentRoundActions[i + 1] = false; // Le joueur ne trahit pas
+                Debug.Log($"playerid {i + 1} chooses to coop");
+                playersCurrentRoundActions[i + 1] = false; // Le joueur coopère
             }
         }
     }
@@ -266,13 +270,10 @@ public class MiniGamePrisonersDilema : MonoBehaviour
             }
         }
         GameManager.Instance.DisplayDatas();
-        Debug.Log("betrayScore: "+betrayScore);
-        Debug.Log("coopScore: "+coopScore);
     }
 
     void IncreaseBetrayScore(int playeriD) // Un joueur trahit sur ce tour
     {
-        Debug.Log("_previousNumberOfBetrayers: " + _previousNumberOfBetrayers);
         switch (_previousNumberOfBetrayers)
         {
             case 0: // 0 joueur a trahi précédemment // was in coop4of4
@@ -326,7 +327,6 @@ public class MiniGamePrisonersDilema : MonoBehaviour
 
     void IncreaseCoopScore(int playeriD) // Un joueur coopère sur ce tour
     {
-        Debug.Log("_previousNumberOfCoops " + _previousNumberOfCoops);
         switch (_previousNumberOfCoops)
         {
             case 0: // 0 joueur a coopéré précédemment // was in betray4of4  
@@ -377,11 +377,64 @@ public class MiniGamePrisonersDilema : MonoBehaviour
         }
     }
 
-    /*protected override void LaunchGame()
+    IEnumerator WaitingForPlayersInput()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+
+        if (timerToThink > 0)
+        {
+
+            timerToThink--;
+            StartCoroutine(WaitingForPlayersInput());
+        }
+
+        // Détermination des différents scores : personnels et globaux comportementaux
+
+        Debug.Log("Debriefing scores for this round");
+
+        if (canVote)
+        {
+            canVote = false;
+
+            DetermineBehaviorScoresToEnable();
+            DeterminePlayerScore();
+
+            timerBeforeStartingNewRound = initialTimerBeforeStarting; // reset du timer avant prochain tour
+
+            Debug.Log("_previousNumberOfBetrayers: " + _previousNumberOfBetrayers);
+            Debug.Log("_previousNumberOfCoops " + _previousNumberOfCoops);
+            Debug.Log("betrayScore: " + betrayScore);
+            Debug.Log("coopScore: " + coopScore);
+
+            StartCoroutine(DelayNextRound());
+        }
+    }
+
+    IEnumerator DelayNextRound()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+
+        if (timerBeforeStartingNewRound > 0)
+        {
+
+            timerBeforeStartingNewRound--;
+            StartCoroutine(DelayNextRound());
+        }
+
+        if (!canVote)
+        {
+            currentRound++;
+            Debug.Log("Waiting before next round");
+            canVote = true; // false -> true ; ouverture des votes
+            timerToThink = initialTimerToThink; // reset du timer pour voter
+            SetupVariables();
+        }
+    }
+    protected override void LaunchGame()
     {
     }
 
     public override void TimerEnd()
     {
-    }*/
+    }
 }

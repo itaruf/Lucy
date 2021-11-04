@@ -2284,7 +2284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1310024000
 Transform:
   m_ObjectHideFlags: 0
@@ -2311,10 +2311,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb56c8775d91a34587f9b5fa3cbd2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRounds: 2
+  miniGameName: Prisoners Dilema
+  howToScore: 0
+  timerNeeded: 0
+  minutes: 0
+  seconds: 5
+  numberOfRounds: 1
   currentRound: 1
   timerToThink: 5
-  timerBeforeStartingNewRound: 5
+  timerBeforeStartingNewRound: 3
   betrayScore: 0
   coopScore: 0
   coop1of4Points: 0
@@ -2325,14 +2330,8 @@ MonoBehaviour:
   betray2of4Points: 2
   betray3of4Points: 1
   betray4of4Points: -2
-  isInCoop1of4: 0
-  isInCoop2of4: 0
-  isInCoop3of4: 0
-  isInCoop4of4: 0
-  isInBetray1of4: 0
-  isInBetray2of4: 0
-  isInBetray3of4: 0
-  isInBetray4of4: 0
+  _numberOfBetrayers: 0
+  _numberOfCoops: 0
   betrayStarterPoints: 5
   betrayFollowPoints: 4
   betrayContinuePoints: 3
@@ -3859,7 +3858,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec584b4fd6e1e2c4e8ac5d4fa552811d, type: 2}
   - {fileID: 11400000, guid: 31e15719029a42f4c9ff807c72f6fbfd, type: 2}
   gamesToLoad:
-  - {fileID: 819553212}
+  - {fileID: 1310024001}
   oldGameLoaded: -1
   miniGameTxt: {fileID: 1907113636}
 --- !u!4 &2068965580
