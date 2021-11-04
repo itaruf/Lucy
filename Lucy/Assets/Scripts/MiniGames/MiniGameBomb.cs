@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MiniGameBomb : MiniGame
 {
+    [Header("Bomb")]
     public float delayBeforeNextPlayer = 1f;
     int actualPlayer;
     bool isBombOnPlayer;
@@ -10,6 +11,7 @@ public class MiniGameBomb : MiniGame
     public GameObject[] bombToShow;
     protected override void LaunchGame()
     {
+        TimerManager.Instance.timerPlay = true;
         actualPlayer = Random.Range(1, 5);
         bombToShow[actualPlayer - 1].SetActive(true);
     }

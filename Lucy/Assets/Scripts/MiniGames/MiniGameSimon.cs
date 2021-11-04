@@ -27,6 +27,7 @@ public class MiniGameSimon : MiniGame
     bool canPressButton;
     protected override void LaunchGame()
     {
+        TimerManager.Instance.timerPlay = true;
         CreateSerie(seriesNum[actualSerieIndex]);
     }
 

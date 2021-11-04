@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
@@ -7,9 +8,12 @@ public class TimerManager : MonoBehaviour
     public float seconds;
     public TextMeshProUGUI[] timerText;
     public string textBeforeNumb = "";
+    public Image cooldown;
     [HideInInspector] public bool timerPlay = false;
 
     public static TimerManager Instance;
+    float secondsAll;
+    float secondsCooldown;
 
     void Awake()
     {
@@ -29,8 +33,15 @@ public class TimerManager : MonoBehaviour
         if (!timerPlay)
             return;
 
+        if(secondsAll == 0)
+        {
+            secondsAll = (int)minutes * 60 + (int)seconds;
+            secondsCooldown = secondsAll;
+        }
+        secondsAll -= Time.deltaTime;
         seconds -= Time.deltaTime;
 
+        SetCooldown();
         SetText();
 
         if (seconds < 0)
@@ -41,6 +52,7 @@ public class TimerManager : MonoBehaviour
         if (minutes < 0)
         {
             timerPlay = false;
+            secondsAll = 0;
             foreach (TextMeshProUGUI text in timerText)
             {
                 text.text = "00 : 00";
@@ -67,5 +79,10 @@ public class TimerManager : MonoBehaviour
                 text.text = textBeforeNumb + " 0" + (int)minutes + " : 0" + ((int)seconds + 1);
             }
         }
+    }
+
+    void SetCooldown()
+    {
+        cooldown.fillAmount = secondsCooldown / secondsAll;
     }
 }

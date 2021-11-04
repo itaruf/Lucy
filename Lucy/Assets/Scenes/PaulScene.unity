@@ -1870,7 +1870,7 @@ MonoBehaviour:
   howToScore: 1
   timerNeeded: 1
   minutes: 0
-  seconds: 4
+  seconds: 15
   delayBeforeNextPlayer: 1
   bombToShow:
   - {fileID: 1152669525}
@@ -2885,7 +2885,7 @@ GameObject:
   - component: {fileID: 1252920141}
   - component: {fileID: 1252920140}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3254,6 +3254,7 @@ MonoBehaviour:
   seconds: 20
   timerText: []
   textBeforeNumb: 
+  cooldown: {fileID: 1252920140}
   timerPlay: 1
 --- !u!4 &1334875435
 Transform:
@@ -3337,7 +3338,7 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  - 1
+  - 2
   - 1
   minSize: 1
   maxSize: 1.5
@@ -3949,9 +3950,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniGameName: Simon
   howToScore: 0
-  timerNeeded: 0
+  timerNeeded: 1
   minutes: 0
-  seconds: 0
+  seconds: 50
   seriesNum: 040000000600000008000000
   delayToShowSerie: 1
   delayToUnShow: 0.25
@@ -5208,8 +5209,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec584b4fd6e1e2c4e8ac5d4fa552811d, type: 2}
   - {fileID: 11400000, guid: 31e15719029a42f4c9ff807c72f6fbfd, type: 2}
   gamesToLoad:
-  - {fileID: 1007695495}
   - {fileID: 1554251917}
+  - {fileID: 1007695495}
   - {fileID: 0}
   oldGameLoaded: -1
   miniGameTxt: {fileID: 1907113636}
