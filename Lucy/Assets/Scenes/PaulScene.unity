@@ -2257,7 +2257,7 @@ MonoBehaviour:
   timerNeeded: 1
   minutes: 0
   seconds: 30
-  waitDialogEnd: 0
+  waitDialogEnd: 1
   dialogToFind: BombIntroVoice
   delayBeforeNextPlayer: 1
   bombToShow:
@@ -2921,7 +2921,7 @@ MonoBehaviour:
   timerNeeded: 0
   minutes: 1
   seconds: 30
-  waitDialogEnd: 0
+  waitDialogEnd: 1
   dialogToFind: WaitToPressIntroVoice
   playerHasPressed: 00000000
 --- !u!1 &1152669525
@@ -11073,9 +11073,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec584b4fd6e1e2c4e8ac5d4fa552811d, type: 2}
   - {fileID: 11400000, guid: 31e15719029a42f4c9ff807c72f6fbfd, type: 2}
   gamesToLoad:
+  - {fileID: 1123542668}
   - {fileID: 1652025382}
   - {fileID: 1554251917}
-  - {fileID: 1123542668}
   - {fileID: 28675917}
   - {fileID: 1007695495}
   - {fileID: 28675917}
