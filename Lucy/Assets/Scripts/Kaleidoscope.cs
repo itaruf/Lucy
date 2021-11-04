@@ -19,6 +19,7 @@ public class Kaleidoscope : MonoBehaviour
 
     private float clipLoudness;
     private float[] clipSampleData;
+    public ParticleSystem particle;
     void Awake()
     {
         clipSampleData = new float[sampleDataLength];
@@ -39,9 +40,11 @@ public class Kaleidoscope : MonoBehaviour
             for (int i = 0; i < imagesLayers.Length; i++)
             {
                 imagesLayers[i].localScale = Vector3.one * minSize;
+                particle.startLifetime = 0;
             }
             return;
         }
+        particle.startLifetime = 10;
         currentUpdateTime += Time.deltaTime;
         if (currentUpdateTime >= updateStep)
         {
@@ -59,6 +62,8 @@ public class Kaleidoscope : MonoBehaviour
                     clamp = minSize;
 
                 clamp = Mathf.Round(clamp * 100f) / 100f;
+
+                particle.startSpeed = (clamp-1) * 20;
 
                 //clamp = Mathf.Clamp(clipLoudness, minSize, maxSize);
                 for (int i = 0; i < imagesLayers.Length; i++)

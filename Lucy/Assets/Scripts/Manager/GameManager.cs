@@ -33,9 +33,6 @@ public class GameManager : MonoBehaviour
         LoadGame(0);
         if (maskUduinoInterface)
             GameObject.Find("UduinoInterface").SetActive(false);
-
-        DialogManager.Instance.PlayDialog("KaleidoTest");
-
     }
 
 
@@ -54,6 +51,12 @@ public class GameManager : MonoBehaviour
             gamesToLoad[oldGameLoaded].gameObject.SetActive(false);
         gamesToLoad[indexLoadGame].gameObject.SetActive(true);
         oldGameLoaded = indexLoadGame;
+    }
+
+    public void LoadNextGame()
+    {
+        oldGameLoaded++;
+        LoadGame(oldGameLoaded);
     }
 
     public void RestartScene()

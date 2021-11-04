@@ -6,6 +6,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI[] playersScoreText;
+    public GameObject[] scoreTxt;
     public int[] scoreByRank;
 
 
@@ -33,8 +34,8 @@ public class ScoreManager : MonoBehaviour
         PlayerData playerData = GameManager.Instance.players[playerNum];
 
         playerData.playerScore += scoreToAdd;
-        playersScoreText[playerNum].text = "Player " + (playerData.playerId+1).ToString() + " - " + playerData.playerName + playerData.playerScore.ToString();
-        playersScoreText[playerNum].color = playerData.playerColor;
+        playersScoreText[playerNum].text = playerData.playerScore.ToString();
+        //playersScoreText[playerNum].color = playerData.playerColor;
     }
 
     public void Score(int scoreToAdd)
@@ -44,8 +45,16 @@ public class ScoreManager : MonoBehaviour
             PlayerData playerData = GameManager.Instance.players[i];
 
             playerData.playerScore += scoreToAdd;
-            playersScoreText[i].text = "Player " + (playerData.playerId).ToString() + " - " + playerData.playerName + " : " + playerData.playerScore.ToString();
-            playersScoreText[i].color = playerData.playerColor;
+            playersScoreText[i].text = playerData.playerScore.ToString();
+            //playersScoreText[i].color = playerData.playerColor;
+        }
+    }
+
+    public void EnableScore(bool active)
+    {
+        for (int i = 0; i < scoreTxt.Length; i++)
+        {
+            scoreTxt[i].SetActive(active);
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Uduino;
 using UnityEngine;
 
@@ -35,7 +34,10 @@ public class LedManager : MonoBehaviour
 
     void SetupButton()
     {
-        UduinoManager.Instance.pinMode(3, PinMode.Output);  // setup du pin 3 pour écriture
+        for (int i = 0; i < 7; i++)
+        {
+            UduinoManager.Instance.pinMode(i, PinMode.Output);  // setup du pin 3 pour écriture
+        }
     }
 
     public void SwitchLight(int playerLight, bool isRed, bool switchOn, float timeBeforeSwitchOff)
@@ -47,12 +49,12 @@ public class LedManager : MonoBehaviour
         }
         else
         {
-            int index = playerLight * 2 +1;
+            int index = playerLight * 2 + 1;
             UduinoManager.Instance.digitalWrite(index, State.HIGH);
         }
 
         if (timeBeforeSwitchOff > 0 && switchOn)
-           StartCoroutine(WaitForSwitchOff(playerLight, isRed, timeBeforeSwitchOff));
+            StartCoroutine(WaitForSwitchOff(playerLight, isRed, timeBeforeSwitchOff));
     }
 
     IEnumerator WaitForSwitchOff(int playerLight, bool isRed, float time)

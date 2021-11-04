@@ -169,13 +169,13 @@ public class MiniGamePrisonersDilema : MiniGame
 
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
-            if (input.IsPlayerPressing(i + 1, "Red"))
+            if (input.IsPlayerPressing(i + 1, "Red")||Input.GetButtonDown("Player" + (i+1) + "Red"))
             {
                 Debug.Log($"playerid {i + 1} chooses to betray");
                 playersCurrentRoundActions[i + 1] = true; // Le joueur trahit
             }
 
-            if (input.IsPlayerPressing(i + 1, "Blue"))
+            if (input.IsPlayerPressing(i + 1, "Blue") || Input.GetButtonDown("Player" + (i + 1) + "Blue"))
             {
                 Debug.Log($"playerid {i + 1} chooses to coop");
                 playersCurrentRoundActions[i + 1] = false; // Le joueur coopère

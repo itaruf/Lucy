@@ -17,7 +17,7 @@ public class MiniGameBomb : MiniGame
     }
     void Update()
     {
-        if (InputManager.Instance.IsPlayerPressing(actualPlayer, "Red"))
+        if (InputManager.Instance.IsPlayerPressing(actualPlayer, "Red") || Input.GetButtonDown("Player" + (actualPlayer) + "Red"))
         {
             if (!TimerManager.Instance.timerPlay)
                 TimerManager.Instance.timerPlay = true;

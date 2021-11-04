@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class MiniGameDelay : MiniGame
 {
+    [Header("Wait")]
     public float waitTime;
     protected override void LaunchGame()
     {
+        ScoreManager.Instance.EnableScore(true);
         StartCoroutine(WaitTimer());
     }
 
@@ -18,15 +20,7 @@ public class MiniGameDelay : MiniGame
     IEnumerator WaitTimer()
     {
         yield return new WaitForSeconds(waitTime);
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
+        ScoreManager.Instance.EnableScore(false);
+        GameEnd();
     }
 }

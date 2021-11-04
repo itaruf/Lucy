@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +12,11 @@ public abstract class MiniGame : MonoBehaviour
     public bool timerNeeded = true;
     public int minutes = 1;
     public int seconds = 30;
+
+    [Header("WaitForDialogEnd")]
+    public bool waitDialogEnd;
+    public string dialogToFind;
+
     public enum HowToScore
     {
         scoreFromScore,
@@ -32,6 +39,21 @@ public abstract class MiniGame : MonoBehaviour
             TimerManager.Instance.seconds = seconds;
             TimerManager.Instance.SetText();
         }
+        if (waitDialogEnd)
+        {
+            DialogManager.Instance.PlayDialog("WaitToPressIntroVoice");
+            StartCoroutine(WaitDialogEnd());
+        }
+        else
+        {
+            LaunchGame();
+        }
+    }
+
+    IEnumerator WaitDialogEnd()
+    {
+        Dialog d = Array.Find(DialogManager.Instance.dialogs, dialog => dialog.name == dialogToFind);
+        yield return new WaitForSeconds(d.clip.length);
         LaunchGame();
     }
 
@@ -45,6 +67,6 @@ public abstract class MiniGame : MonoBehaviour
 
     public virtual void GameEnd()
     {
-
+        GameManager.Instance.LoadNextGame();
     }
 }
