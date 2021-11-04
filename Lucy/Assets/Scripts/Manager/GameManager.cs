@@ -61,4 +61,17 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
+
+    public void DisplayDatas()
+    {
+        for (int i=0; i< players.Length; i++)
+        {
+            Debug.Log("playerId: " + (i+1) + " has a score of : "+players[i].playerScore);
+        }
+    }
+
+    public void DisplayData(int playerId)
+    {
+        Debug.Log("playerId: "+(playerId+1)+ " has a score of : "+players[playerId].playerScore);
+    }
 }
