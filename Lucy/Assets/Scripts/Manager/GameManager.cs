@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI miniGameTxt;
 
     public static GameManager Instance;
+    public bool maskUduinoInterface;
 
     void Awake()
     {
@@ -29,12 +30,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //UduinoManager.Instance.pinMode(3, PinMode.Output);  // setup du pin 3 pour écriture
-        //UduinoManager.Instance.digitalWrite(3, State.HIGH); // allume "une led"
-        //UduinoManager.Instance.digitalWrite(3, State.LOW); // eteint
-
-        LoadGame(0);
+        LoadGame(1);
+        if (maskUduinoInterface)
+            GameObject.Find("UduinoInterface").SetActive(false);
     }
+
 
     void Update()
     {
