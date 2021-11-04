@@ -32,25 +32,33 @@ public class InputManager : MonoBehaviour
         int numbersOnly = int.Parse(Regex.Replace(name, "[^0-9]", ""));
 
         bool isRed = name.Contains("Red");
-        Press(numbersOnly, isRed);
+        Press(numbersOnly, isRed, true);
     }
 
-    void Press(int playerID, bool red)
+    void Update()
     {
-        playerID --;
+        for (int i = 0; i < GameManager.Instance.players.Length; i++)
+        {
+            Press(i + 1, true, Input.GetButton("Player" + (i + 1) + "Red"));
+        }
+    }
+
+    void Press(int playerID, bool red, bool imPressing)
+    {
+        playerID--;
         if (red)
         {
-            inputs[playerID].red = true;
+            inputs[playerID].red = imPressing;
         }
         else
         {
-            inputs[playerID].blue = true;
+            inputs[playerID].blue = imPressing;
         }
     }
 
     void LateUpdate()
     {
-        ResetBool();
+        //ResetBool();
     }
 
     void ResetBool()
@@ -68,7 +76,7 @@ public class InputManager : MonoBehaviour
     {
         if (color.Contains("r") || color.Contains("R"))
         {
-            if(inputs[playerID - 1].red)
+            if (inputs[playerID - 1].red)
                 Debug.Log("<color=#FF0000>Player " + playerID + "</color>");
 
             return inputs[playerID - 1].red;
@@ -97,7 +105,7 @@ public class InputManager : MonoBehaviour
             {
                 if (inputs[i].blue)
                 {
-                    Debug.Log("<color=#0000FF>Player " + (i+1) + "</color>");
+                    Debug.Log("<color=#0000FF>Player " + (i + 1) + "</color>");
                     return true;
                 }
 

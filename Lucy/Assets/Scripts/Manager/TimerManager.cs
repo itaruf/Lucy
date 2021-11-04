@@ -5,7 +5,7 @@ public class TimerManager : MonoBehaviour
 {
     public float minutes;
     public float seconds;
-    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI[] timerText;
     public string textBeforeNumb = "";
     [HideInInspector] public bool timerPlay = false;
 
@@ -23,6 +23,7 @@ public class TimerManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
     void Update()
     {
         if (!timerPlay)
@@ -40,7 +41,10 @@ public class TimerManager : MonoBehaviour
         if (minutes < 0)
         {
             timerPlay = false;
-            timerText.text = "00 : 00";
+            foreach (TextMeshProUGUI text in timerText)
+            {
+                text.text = "00 : 00";
+            }
             GameManager.Instance.gamesToLoad[GameManager.Instance.oldGameLoaded].TimerEnd();
             return;
         }
@@ -50,8 +54,18 @@ public class TimerManager : MonoBehaviour
     {
         //Add 0 before number under 10
         if (seconds >= 10)
-            timerText.text = textBeforeNumb + " 0" + (int)minutes + " : " + ((int)seconds + 1);
+        {
+            foreach (TextMeshProUGUI text in timerText)
+            {
+                text.text = textBeforeNumb + " 0" + (int)minutes + " : " + ((int)seconds + 1);
+            }
+        }
         else
-            timerText.text = textBeforeNumb + " 0" + (int)minutes + " : 0" + ((int)seconds + 1);
+        {
+            foreach (TextMeshProUGUI text in timerText)
+            {
+                text.text = textBeforeNumb + " 0" + (int)minutes + " : 0" + ((int)seconds + 1);
+            }
+        }
     }
 }

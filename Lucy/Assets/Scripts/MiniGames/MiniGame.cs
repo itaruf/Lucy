@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class MiniGame : MonoBehaviour
@@ -22,7 +21,10 @@ public abstract class MiniGame : MonoBehaviour
     void OnEnable()
     {
         TimerManager.Instance.timerPlay = false;
-        TimerManager.Instance.timerText.text = "";
+        foreach (TextMeshProUGUI text in TimerManager.Instance.timerText)
+        {
+            text.text = "";
+        }
         TimerManager.Instance.gameObject.SetActive(timerNeeded);
         if (timerNeeded)
         {
@@ -35,7 +37,7 @@ public abstract class MiniGame : MonoBehaviour
 
     void Update()
     {
-       
+
     }
 
     protected abstract void LaunchGame();
@@ -43,6 +45,6 @@ public abstract class MiniGame : MonoBehaviour
 
     public virtual void GameEnd()
     {
-        
+
     }
 }
