@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -40,13 +39,36 @@ public class MiniGameSimon : MiniGame
     {
         if (canPressButton)
         {
-            if (InputManager.Instance.IsPlayerPressing(playerShouldPress, colorToPress))
+            for (int i = 0; i < GameManager.Instance.players.Length; i++)
+            {
+                if (Input.GetButtonDown("Player" + (i + 1) + "Red"))
+                {
+                    Debug.Log((i + 1) + "Red");
+                }
+                if (Input.GetButtonDown("Player" + (i + 1) + "Blue"))
+                {
+                    Debug.Log((i + 1) + "Blue");
+                }
+            }
+            //if (InputManager.Instance.IsPlayerPressing(playerShouldPress, colorToPress))
+            //{
+            //    NextRound();
+            //}
+            //else if(InputManager.Instance.IsPlayerPressing("Red") || InputManager.Instance.IsPlayerPressing("Blue"))
+            //{
+            //    Defeat();
+            //}
+            if (Input.GetButtonDown("Player" + (playerShouldPress) + colorToPress))
             {
                 NextRound();
             }
-            else if(InputManager.Instance.IsPlayerPressing("Red") || InputManager.Instance.IsPlayerPressing("Blue"))
+            else
             {
-                Defeat();
+                for (int i = 0; i < GameManager.Instance.players.Length; i++)
+                {
+                    if (Input.GetButtonDown("Player" + (i + 1) + "Red") || Input.GetButtonDown("Player" + (i + 1) + "Blue"))
+                        Defeat();
+                }
             }
         }
     }
@@ -130,7 +152,7 @@ public class MiniGameSimon : MiniGame
     }
     public void CreateSerie(int roundNum)
     {
-        if(actualSerieIndex == seriesNum.Length)
+        if (actualSerieIndex == seriesNum.Length)
         {
             Victory();
             return;

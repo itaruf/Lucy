@@ -842,8 +842,8 @@ MonoBehaviour:
   - playerName: 
     red: 0
     blue: 0
-  inputsPressed: []
-  playWithUIButton: 1
+  inputsWaitForUp: []
+  playWithUIButton: 0
 --- !u!1 &389428129
 GameObject:
   m_ObjectHideFlags: 0
@@ -5284,8 +5284,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec584b4fd6e1e2c4e8ac5d4fa552811d, type: 2}
   - {fileID: 11400000, guid: 31e15719029a42f4c9ff807c72f6fbfd, type: 2}
   gamesToLoad:
-  - {fileID: 1188445489}
   - {fileID: 1554251917}
+  - {fileID: 1188445489}
   - {fileID: 1007695495}
   oldGameLoaded: -1
   miniGameTxt: {fileID: 1907113636}

@@ -498,11 +498,11 @@ InputManager:
     sensitivity: 1000
     snap: 1
     invert: 0
-    type: 2
+    type: 0
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Player2Red
+    m_Name: Player1Blue
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -518,7 +518,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Player3Red
+    m_Name: Player2Red
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -530,11 +530,11 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Player4Red
+    m_Name: Player2Blue
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -546,11 +546,11 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Player1Blue
+    m_Name: Player3Red
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -562,11 +562,11 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Player2Blue
+    m_Name: Player3Blue
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -578,11 +578,11 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Player3Blue
+    m_Name: Player4Red
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -594,7 +594,7 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 0
     joyNum: 0
   - serializedVersion: 3
@@ -610,6 +610,6 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
+    type: 0
     axis: 0
     joyNum: 0

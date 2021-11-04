@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -6,7 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public InputManagerColorButton[] inputs;
-    public List<InputManagerColorButton> inputsPressed;
+    public List<InputManagerColorButton> inputsWaitForUp;
     public static InputManager Instance;
     public bool playWithUIButton;
 
@@ -27,7 +26,7 @@ public class InputManager : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
             inputs[i].playerName = GameManager.Instance.players[i].playerName + " | id :" + GameManager.Instance.players[i].playerId;
-            inputsPressed.Add(inputs[i]);
+            inputsWaitForUp.Add(inputs[i]);
             LedManager.Instance.SwitchLight(i, true, true, 0);
             LedManager.Instance.SwitchLight(i, false, true, 0);
         }
@@ -49,8 +48,26 @@ public class InputManager : MonoBehaviour
         {
             for (int i = 0; i < GameManager.Instance.players.Length; i++)
             {
-                Press(i + 1, true, Input.GetButton("Player" + (i + 1) + "Blue"));
-                Press(i + 1, false, Input.GetButton("Player" + (i + 1) + "Red"));
+                if (Input.GetButton("Player" + (i + 1) + "Red") && !inputs[i].red)
+                {
+                    inputs[i].red = true;
+                    Debug.Log("La vie de ma merer");
+                }
+                else if (Input.GetButtonUp("Player" + (i + 1).ToString() + "Red"))
+                {
+                    inputs[i].red = false;
+                }
+                if (Input.GetButtonDown("Player" + (i + 1).ToString() + "Blue") && !inputs[i].blue)
+                {
+                    inputs[i].blue = true;
+                    Debug.Log("La vie de ma merer");
+                }
+                else if (Input.GetButtonUp("Player" + (i + 1).ToString() + "Blue"))
+                {
+                    inputs[i].blue = false;
+                }
+                //Press(i + 1, true, Input.GetButton("Player" + (i + 1) + "Red"));
+                //Press(i + 1, false, Input.GetButtonDown("Player" + (i + 1) + "Blue"));
             }
         }
     }
@@ -61,25 +78,17 @@ public class InputManager : MonoBehaviour
         if (red)
         {
             inputs[playerID].red = imPressing;
+            if (!inputsWaitForUp[playerID].red)
+            {
+            }
         }
         else
         {
             inputs[playerID].blue = imPressing;
-        }
-        StartCoroutine(PressWithDelay(playerID, red, imPressing));
-    }
-
-    IEnumerator PressWithDelay(int playerID, bool red, bool imPressing)
-    {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        if (red)
-        {
-            inputsPressed[playerID].red = imPressing;
-        }
-        else
-        {
-            inputsPressed[playerID].blue = imPressing;
+            if (!inputsWaitForUp[playerID].blue && imPressing)
+            {
+                inputsWaitForUp[playerID].blue = true;
+            }
         }
     }
 
@@ -87,6 +96,7 @@ public class InputManager : MonoBehaviour
     {
         if (playWithUIButton)
             ResetBool();
+        //Up();
     }
 
     void ResetBool()
@@ -100,22 +110,50 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    void Up()
+    {
+        for (int i = 0; i < inputsWaitForUp.Count; i++)
+        {
+            //if (!inputs[0].blue)
+            //{
+            //    Debug.Log("BlueIsUp");
+            //    inputsWaitForUp[0].blue = false;
+            //}
+            //if (!inputs[0].red)
+            //{
+            //    inputsWaitForUp[0].red = false;
+            //}
+        }
+    }
+
     public bool IsPlayerPressing(int playerID, string color)
     {
         if (color.Contains("r") || color.Contains("R"))
         {
-            if (inputs[playerID - 1].red && !inputsPressed[playerID -1].red)
+            if (Input.GetButtonDown("Player" + (playerID) + "Red"))
+            {
+                //inputsWaitForUp[playerID - 1].red = true;
                 Debug.Log("<color=#FF0000>Player " + playerID + "</color>");
+            }
 
-            return inputs[playerID - 1].red && !inputsPressed[playerID - 1].red;
+            return inputs[playerID - 1].red;
         }
         else
         {
-            if (inputs[playerID - 1].blue && !inputsPressed[playerID - 1].blue)
+            if (Input.GetButtonDown("Player" + (playerID) + "Blue"))
+            {
+                //inputsWaitForUp[playerID - 1].red = true;
                 Debug.Log("<color=#0000FF>Player " + playerID + "</color>");
+            }
+            //if (inputs[playerID - 1].blue && !inputsWaitForUp[playerID - 1].blue)
+            //{
+            //    inputsWaitForUp[playerID - 1].blue = true;
+            //    Debug.Log("<color=#0000FF>Player " + playerID + "</color>");
+            //}
 
-            return inputs[playerID - 1].blue && !inputsPressed[playerID - 1].blue;
+            return inputs[playerID - 1].blue && !inputsWaitForUp[playerID - 1].blue;
         }
+
     }
     public bool IsPlayerPressing(string color)
     {
@@ -123,7 +161,7 @@ public class InputManager : MonoBehaviour
         {
             if (color.Contains("r") || color.Contains("R"))
             {
-                if (!inputs[i].red && inputsPressed[i].red)
+                if (inputs[i].red)
                 {
                     Debug.Log("<color=#FF0000>Player " + (i + 1) + "</color>");
                     return true;
@@ -131,7 +169,7 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                if (!inputs[i].blue && inputsPressed[i].blue)
+                if (inputs[i].blue)
                 {
                     Debug.Log("<color=#0000FF>Player " + (i + 1) + "</color>");
                     return true;
