@@ -26,10 +26,10 @@ public class LedManager : MonoBehaviour
     {
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
-            if (InputManager.Instance.IsPlayerPressing(i + 1, "Red"))
-            {
-                LedManager.Instance.SwitchLight(i+2, "Red", true, 1);
-            }
+            //if (InputManager.Instance.IsPlayerPressing(i + 1, "Red"))
+            //{
+            //    LedManager.Instance.SwitchLight(i+2, "Red", true, 1);
+            //}
         }
     }
 

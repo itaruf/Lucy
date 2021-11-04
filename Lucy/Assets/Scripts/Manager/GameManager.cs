@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
         LoadGame(1);
         if (maskUduinoInterface)
             GameObject.Find("UduinoInterface").SetActive(false);
+
+        DialogManager.Instance.PlayDialog("KaleidoTest");
+
     }
 
 

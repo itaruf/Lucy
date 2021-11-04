@@ -5,6 +5,9 @@ using UnityEngine;
 public class IMADialog : MonoBehaviour
 {
     public Dialog dialog;
+    AudioSource kalei;
+    AudioSource source;
+
     void Start()
     {
         if (dialog.dialogToReadAfter != "")
@@ -15,12 +18,16 @@ public class IMADialog : MonoBehaviour
         {
             Destroy(gameObject, dialog.clip.length);
         }
+
+        source = GetComponent<AudioSource>();
+        kalei = FindObjectOfType<Kaleidoscope>().audioSource = source;
     }
 
     IEnumerator TimeBeforeAction(float time)
     {
         yield return new WaitForSeconds(time);
         DialogManager.Instance.PlayDialog(dialog.dialogToReadAfter + dialog.delayBeforeNextClip);
+        kalei = null;
         Destroy(gameObject);
     }
 }

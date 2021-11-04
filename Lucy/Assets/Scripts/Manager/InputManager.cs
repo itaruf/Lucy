@@ -5,6 +5,7 @@ public class InputManager : MonoBehaviour
 {
     public InputManagerColorButton[] inputs;
     public static InputManager Instance;
+    public bool playWithUIButton;
 
     void Awake()
     {
@@ -37,9 +38,13 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < GameManager.Instance.players.Length; i++)
+        if (!playWithUIButton)
         {
-            Press(i + 1, true, Input.GetButton("Player" + (i + 1) + "Red"));
+            for (int i = 0; i < GameManager.Instance.players.Length; i++)
+            {
+                Press(i + 1, true, Input.GetButton("Player" + (i + 1) + "Blue"));
+                Press(i + 1, true, Input.GetButton("Player" + (i + 1) + "Red"));
+            }
         }
     }
 
@@ -58,7 +63,8 @@ public class InputManager : MonoBehaviour
 
     void LateUpdate()
     {
-        //ResetBool();
+        if (playWithUIButton)
+            ResetBool();
     }
 
     void ResetBool()
