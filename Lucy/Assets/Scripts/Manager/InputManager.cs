@@ -103,17 +103,17 @@ public class InputManager : MonoBehaviour
     {
         if (color.Contains("r") || color.Contains("R"))
         {
-            if (inputs[playerID - 1].red && !inputsPressed[playerID -1].red)
+            if (!inputs[playerID - 1].red && inputsPressed[playerID -1].red)
                 Debug.Log("<color=#FF0000>Player " + playerID + "</color>");
 
-            return inputs[playerID - 1].red && !inputsPressed[playerID - 1].red;
+            return !inputs[playerID - 1].red && inputsPressed[playerID - 1].red;
         }
         else
         {
-            if (inputs[playerID - 1].blue && !inputsPressed[playerID - 1].blue)
+            if (!inputs[playerID - 1].blue && inputsPressed[playerID - 1].blue)
                 Debug.Log("<color=#0000FF>Player " + playerID + "</color>");
 
-            return inputs[playerID - 1].blue && !inputsPressed[playerID - 1].blue;
+            return !inputs[playerID - 1].blue && inputsPressed[playerID - 1].blue;
         }
     }
     public bool IsPlayerPressing(string color)
