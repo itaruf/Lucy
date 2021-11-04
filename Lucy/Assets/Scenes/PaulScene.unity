@@ -842,7 +842,8 @@ MonoBehaviour:
   - playerName: 
     red: 0
     blue: 0
-  playWithUIButton: 0
+  inputsPressed: []
+  playWithUIButton: 1
 --- !u!1 &389428129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &734382397
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2084,7 +2085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1026730966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2739,6 +2740,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170563472}
   m_CullTransparentMesh: 1
+--- !u!1 &1188445487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1188445488}
+  - component: {fileID: 1188445489}
+  m_Layer: 0
+  m_Name: PrisonersDilemaGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1188445488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188445487}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1946406919}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1188445489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188445487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb56c8775d91a34587f9b5fa3cbd2ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miniGameName: Prisoners Dilema
+  howToScore: 0
+  timerNeeded: 0
+  minutes: 0
+  seconds: 5
+  numberOfRounds: 3
+  currentRound: 1
+  timerToThink: 8
+  timerBeforeStartingNewRound: 8
+  betrayScore: 0
+  coopScore: 0
+  coop1of4Points: 0
+  coop2of4Points: 0
+  coop3of4Points: 0
+  coop4of4Points: 4
+  betray1of4Points: 4
+  betray2of4Points: 2
+  betray3of4Points: 1
+  betray4of4Points: -2
+  _numberOfBetrayers: 0
+  _numberOfCoops: 0
+  betrayStarterPoints: 5
+  betrayFollowPoints: 4
+  betrayContinuePoints: 3
+  betrayContinueHardPoints: 6
+  coopStarterPoints: 5
+  coopFollowPoints: 4
+  coopContinuePoints: 2
+  coopFighterPoints: 3
+  coopFighterHardPoints: 6
 --- !u!1 &1239435441
 GameObject:
   m_ObjectHideFlags: 0
@@ -4183,7 +4257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1732389796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4662,7 +4736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1812774173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5021,6 +5095,7 @@ Transform:
   - {fileID: 1652025381}
   - {fileID: 1554251916}
   - {fileID: 819553211}
+  - {fileID: 1188445488}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5209,9 +5284,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec584b4fd6e1e2c4e8ac5d4fa552811d, type: 2}
   - {fileID: 11400000, guid: 31e15719029a42f4c9ff807c72f6fbfd, type: 2}
   gamesToLoad:
+  - {fileID: 1188445489}
   - {fileID: 1554251917}
   - {fileID: 1007695495}
-  - {fileID: 0}
   oldGameLoaded: -1
   miniGameTxt: {fileID: 1907113636}
   maskUduinoInterface: 1

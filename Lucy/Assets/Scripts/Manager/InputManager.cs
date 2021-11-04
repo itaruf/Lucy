@@ -1,9 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     public InputManagerColorButton[] inputs;
+    public List<InputManagerColorButton> inputsPressed;
     public static InputManager Instance;
     public bool playWithUIButton;
 
@@ -24,6 +27,7 @@ public class InputManager : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
             inputs[i].playerName = GameManager.Instance.players[i].playerName + " | id :" + GameManager.Instance.players[i].playerId;
+            inputsPressed.Add(inputs[i]);
             LedManager.Instance.SwitchLight(i, true, true, 0);
             LedManager.Instance.SwitchLight(i, false, true, 0);
         }
@@ -61,6 +65,20 @@ public class InputManager : MonoBehaviour
         else
         {
             inputs[playerID].blue = imPressing;
+        }
+        StartCoroutine(PressWithDelay(playerID, red, imPressing));
+    }
+
+    IEnumerator PressWithDelay(int playerID, bool red, bool imPressing)
+    {
+        yield return new WaitForEndOfFrame();
+        if (red)
+        {
+            inputsPressed[playerID].red = imPressing;
+        }
+        else
+        {
+            inputsPressed[playerID].blue = imPressing;
         }
     }
 
@@ -122,8 +140,47 @@ public class InputManager : MonoBehaviour
         }
         return false;
     }
+    public bool IsPlayerHolding(int playerID, string color)
+    {
+        if (color.Contains("r") || color.Contains("R"))
+        {
+            if (inputs[playerID - 1].red)
+                Debug.Log("<color=#FF0000>Player " + playerID + "</color>");
 
+            return inputs[playerID - 1].red;
+        }
+        else
+        {
+            if (inputs[playerID - 1].blue)
+                Debug.Log("<color=#0000FF>Player " + playerID + "</color>");
 
+            return inputs[playerID - 1].blue;
+        }
+    }
+    public bool IsPlayerHolding(string color)
+    {
+        for (int i = 0; i < inputs.Length; i++)
+        {
+            if (color.Contains("r") || color.Contains("R"))
+            {
+                if (inputs[i].red)
+                {
+                    Debug.Log("<color=#FF0000>Player " + (i + 1) + "</color>");
+                    return true;
+                }
+            }
+            else
+            {
+                if (inputs[i].blue)
+                {
+                    Debug.Log("<color=#0000FF>Player " + (i + 1) + "</color>");
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
 }
 
 

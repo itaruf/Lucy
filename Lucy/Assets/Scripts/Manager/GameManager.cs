@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        LoadGame(1);
+        LoadGame(0);
         if (maskUduinoInterface)
             GameObject.Find("UduinoInterface").SetActive(false);
 
