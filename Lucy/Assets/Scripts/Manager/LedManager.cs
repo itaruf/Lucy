@@ -38,16 +38,37 @@ public class LedManager : MonoBehaviour
         UduinoManager.Instance.pinMode(3, PinMode.Output);  // setup du pin 3 pour écriture
     }
 
-    public void SwitchLight(int playerLight, string ledColor, bool switchOn, float timeBeforeSwitchOff)
+    public void SwitchLight(int playerLight, bool isRed, bool switchOn, float timeBeforeSwitchOff)
     {
-        UduinoManager.Instance.digitalWrite(playerLight, State.HIGH);
+        if (isRed)
+        {
+            int index = playerLight * 2;
+            UduinoManager.Instance.digitalWrite(index, State.HIGH);
+        }
+        else
+        {
+            int index = playerLight * 2 +1;
+            UduinoManager.Instance.digitalWrite(index, State.HIGH);
+        }
+
         if (timeBeforeSwitchOff > 0 && switchOn)
-           StartCoroutine(WaitForSwitchOff(playerLight, ledColor, timeBeforeSwitchOff));
+           StartCoroutine(WaitForSwitchOff(playerLight, isRed, timeBeforeSwitchOff));
     }
 
-    IEnumerator WaitForSwitchOff(int playerLight, string color, float time)
+    IEnumerator WaitForSwitchOff(int playerLight, bool isRed, float time)
     {
+        playerLight--;
         yield return new WaitForSeconds(time);
-        UduinoManager.Instance.digitalWrite(playerLight, State.LOW);
+        if (isRed)
+        {
+            int index = playerLight * 2;
+            UduinoManager.Instance.digitalWrite(index, State.LOW);
+        }
+        else
+        {
+            int index = playerLight * 2 + 1;
+            UduinoManager.Instance.digitalWrite(index, State.LOW);
+        }
+
     }
 }

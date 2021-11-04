@@ -24,7 +24,10 @@ public class InputManager : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
             inputs[i].playerName = GameManager.Instance.players[i].playerName + " | id :" + GameManager.Instance.players[i].playerId;
+            LedManager.Instance.SwitchLight(i, true, true, 0);
+            LedManager.Instance.SwitchLight(i, false, true, 0);
         }
+
     }
 
     public void IsPressed(Transform buttonName)
@@ -43,7 +46,7 @@ public class InputManager : MonoBehaviour
             for (int i = 0; i < GameManager.Instance.players.Length; i++)
             {
                 Press(i + 1, true, Input.GetButton("Player" + (i + 1) + "Blue"));
-                Press(i + 1, true, Input.GetButton("Player" + (i + 1) + "Red"));
+                Press(i + 1, false, Input.GetButton("Player" + (i + 1) + "Red"));
             }
         }
     }

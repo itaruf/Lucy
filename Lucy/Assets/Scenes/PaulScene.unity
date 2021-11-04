@@ -842,7 +842,7 @@ MonoBehaviour:
   - playerName: 
     red: 0
     blue: 0
-  playWithUIButton: 1
+  playWithUIButton: 0
 --- !u!1 &389428129
 GameObject:
   m_ObjectHideFlags: 0
