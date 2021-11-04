@@ -68,5 +68,6 @@ public abstract class MiniGame : MonoBehaviour
     public virtual void GameEnd()
     {
         GameManager.Instance.LoadNextGame();
+        gameObject.SetActive(false);
     }
 }

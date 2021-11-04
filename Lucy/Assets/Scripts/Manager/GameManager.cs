@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Uduino;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public PlayerData[] players;
     public MiniGame[] gamesToLoad;
-    [HideInInspector]public int oldGameLoaded = -1;
+    [HideInInspector] public int oldGameLoaded = -1;
     public TextMeshProUGUI miniGameTxt;
 
     public static GameManager Instance;
@@ -17,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
         }
@@ -48,14 +45,18 @@ public class GameManager : MonoBehaviour
     {
         miniGameTxt.text = gamesToLoad[indexLoadGame].miniGameName;
         if (oldGameLoaded != -1)
+        {
             gamesToLoad[oldGameLoaded].gameObject.SetActive(false);
-        gamesToLoad[indexLoadGame].gameObject.SetActive(true);
+        }
+            gamesToLoad[indexLoadGame].gameObject.SetActive(true);
         oldGameLoaded = indexLoadGame;
     }
 
     public void LoadNextGame()
     {
         oldGameLoaded++;
+
+        Debug.Log("old" + oldGameLoaded);
         LoadGame(oldGameLoaded);
     }
 
@@ -70,14 +71,14 @@ public class GameManager : MonoBehaviour
 
     public void DisplayDatas()
     {
-        for (int i=0; i< players.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
-            Debug.Log("playerId: " + (i+1) + " has a score of : "+players[i].playerScore);
+            Debug.Log("playerId: " + (i + 1) + " has a score of : " + players[i].playerScore);
         }
     }
 
     public void DisplayData(int playerId)
     {
-        Debug.Log("playerId: "+(playerId+1)+ " has a score of : "+players[playerId].playerScore);
+        Debug.Log("playerId: " + (playerId + 1) + " has a score of : " + players[playerId].playerScore);
     }
 }

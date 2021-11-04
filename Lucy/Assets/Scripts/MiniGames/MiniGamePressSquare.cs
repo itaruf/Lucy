@@ -9,7 +9,7 @@ public class MiniGamePressSquare : MiniGame
     int allAreGood;
     protected override void LaunchGame()
     {
-
+        canPress = true;
     }
 
     public override void TimerEnd()
@@ -30,6 +30,7 @@ public class MiniGamePressSquare : MiniGame
                 }
                 if(Input.GetButtonDown("Player" + (i+1) + "Red"))
                 {
+                    Debug.Log("Player" + (i + 1) + "Red");
                     playerHasPressed[i] = true;
                 }
             }

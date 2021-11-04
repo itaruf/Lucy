@@ -51,7 +51,6 @@ public class InputManager : MonoBehaviour
                 if (Input.GetButton("Player" + (i + 1) + "Red") && !inputs[i].red)
                 {
                     inputs[i].red = true;
-                    Debug.Log("La vie de ma merer");
                 }
                 else if (Input.GetButtonUp("Player" + (i + 1).ToString() + "Red"))
                 {
@@ -60,7 +59,6 @@ public class InputManager : MonoBehaviour
                 if (Input.GetButtonDown("Player" + (i + 1).ToString() + "Blue") && !inputs[i].blue)
                 {
                     inputs[i].blue = true;
-                    Debug.Log("La vie de ma merer");
                 }
                 else if (Input.GetButtonUp("Player" + (i + 1).ToString() + "Blue"))
                 {

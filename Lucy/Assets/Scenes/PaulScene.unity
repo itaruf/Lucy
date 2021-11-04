@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d158d99127a15a74f95a2c700c49a99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameName: 
+  miniGameName: Delay
   howToScore: 0
   timerNeeded: 0
   minutes: 1
@@ -2611,12 +2611,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniGameName: 
   howToScore: 0
-  timerNeeded: 1
+  timerNeeded: 0
   minutes: 1
   seconds: 30
-  waitDialogEnd: 1
+  waitDialogEnd: 0
   dialogToFind: WaitToPressIntroVoice
-  playerHasPressed: 
+  playerHasPressed: 00000000
 --- !u!1 &1152669525
 GameObject:
   m_ObjectHideFlags: 0
