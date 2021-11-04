@@ -26,11 +26,12 @@ public class ScoreManager : MonoBehaviour
     }
     void Start()
     {
-        Score(0);
+        AddScore(0);
     }
 
     public void AddScore(int playerNum, int scoreToAdd)
     {
+        Debug.Log(playerNum);
         PlayerData playerData = GameManager.Instance.players[playerNum];
 
         playerData.playerScore += scoreToAdd;
@@ -38,7 +39,7 @@ public class ScoreManager : MonoBehaviour
         //playersScoreText[playerNum].color = playerData.playerColor;
     }
 
-    public void Score(int scoreToAdd)
+    public void AddScore(int scoreToAdd)
     {
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {

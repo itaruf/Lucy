@@ -67,20 +67,30 @@ public class MiniGameSimon : MiniGame
                 for (int i = 0; i < GameManager.Instance.players.Length; i++)
                 {
                     if (Input.GetButtonDown("Player" + (i + 1) + "Red") || Input.GetButtonDown("Player" + (i + 1) + "Blue"))
-                        Defeat();
+                        Defeat(i + 1);
                 }
             }
         }
     }
 
-    void Defeat()
+    void Defeat(int playerFailed)
     {
-        Debug.Log("Defeat");
+        int rand = Random.Range(1, 5);
+        while (rand == playerFailed)
+        {
+            rand = Random.Range(1, 5);
+        }
+        ScoreManager.Instance.AddScore(rand, -3);
+        GameEnd();
     }
 
     void Victory()
     {
-        Debug.Log("Victory");
+        for (int i = 0; i < GameManager.Instance.players.Length; i++)
+        {
+            ScoreManager.Instance.AddScore(i + 1, 3);
+        }
+        GameEnd();
     }
 
     void NextRound()

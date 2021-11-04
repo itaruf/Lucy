@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Kaleidoscope : MonoBehaviour
 {
     public RectTransform[] imagesLayers;
+    public FeedbackChild[] imagesFeedback;
     public float speed = 0.1f;
 
     [Header("Audio")]
@@ -20,12 +23,22 @@ public class Kaleidoscope : MonoBehaviour
     private float clipLoudness;
     private float[] clipSampleData;
     public ParticleSystem particle;
+
     void Awake()
     {
         clipSampleData = new float[sampleDataLength];
     }
     void Update()
     {
+        //PLAYER FEEDBACK
+
+        for (int i = 0; i < imagesFeedback.Length; i++)
+        {
+            if (Input.GetButtonDown("Player" + (i + 1) + "Red") || Input.GetButtonDown("Player" + (i + 1) + "Blue"))
+            {
+                imagesFeedback[i].Active();
+            }
+        }
         //ROTATE
 
         for (int i = 0; i < imagesLayers.Length; i++)
@@ -35,7 +48,7 @@ public class Kaleidoscope : MonoBehaviour
 
         //AUDIO
 
-        if(audioSource.clip == null)
+        if (audioSource.clip == null)
         {
             for (int i = 0; i < imagesLayers.Length; i++)
             {
@@ -54,7 +67,7 @@ public class Kaleidoscope : MonoBehaviour
             foreach (var sample in clipSampleData)
             {
                 clipLoudness += Mathf.Abs(sample);
-                float clamp =  1+ clipLoudness / divider;
+                float clamp = 1 + clipLoudness / divider;
 
                 if (clamp > maxSize)
                     clamp = maxSize;
@@ -63,12 +76,12 @@ public class Kaleidoscope : MonoBehaviour
 
                 clamp = Mathf.Round(clamp * 100f) / 100f;
 
-                particle.startSpeed = (clamp-1) * 20;
+                particle.startSpeed = (clamp - 1) * 20;
 
                 //clamp = Mathf.Clamp(clipLoudness, minSize, maxSize);
                 for (int i = 0; i < imagesLayers.Length; i++)
                 {
-                    
+
                     Vector3 newScale;
                     if (multipleLayerWith[i] == 0)
                         newScale = Vector3.one;

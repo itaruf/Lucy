@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class MiniGameVote : MiniGame
 {
@@ -32,7 +33,7 @@ public class MiniGameVote : MiniGame
         InputManager input = InputManager.Instance;
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
-            if (input.IsPlayerPressing(i + 1, "Red"))
+            if (Input.GetButtonDown("Player"+(i+1)+"Red"))
             {
                 voteFor[i] = i + 2;
                 if (voteFor[i] > 4)
@@ -40,9 +41,18 @@ public class MiniGameVote : MiniGame
                 else if (voteFor[i] < 1)
                     voteFor[i] += 4;
             }
-            if (input.IsPlayerPressing(i + 1, "Blue"))
+            if (Input.GetButtonDown("Player" + (i + 1) + "Blue"))
             {
                 voteFor[i] = i + 0;
+                if (voteFor[i] > 4)
+                    voteFor[i] -= 4;
+                else if (voteFor[i] < 1)
+                    voteFor[i] += 4;
+            }
+
+            if (Input.GetButton("Player" + (i + 1) + "Blue") && Input.GetButton("Player" + (i + 1) + "Red"))
+            {
+                voteFor[i] = i + 3;
                 if (voteFor[i] > 4)
                     voteFor[i] -= 4;
                 else if (voteFor[i] < 1)
@@ -55,7 +65,18 @@ public class MiniGameVote : MiniGame
     {
         canVote = false;
         PlayerDidntVote();
-        SortValues();
+        Debrief();
+        //SortValues();
+    }
+
+    void Debrief()
+    {
+        for (int i = 0; i < voteFor.Count; i++)
+        {
+            ScoreManager.Instance.AddScore(voteFor[i]-1, -2);
+        }
+
+        GameEnd();
     }
 
     void PlayerDidntVote()

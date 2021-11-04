@@ -36,9 +36,9 @@ public class TimerManager : MonoBehaviour
         if(secondsAll == 0)
         {
             secondsAll = (int)minutes * 60 + (int)seconds;
-            secondsCooldown = secondsAll;
+            secondsCooldown = 0;
         }
-        secondsAll -= Time.deltaTime;
+        secondsCooldown += Time.deltaTime;
         seconds -= Time.deltaTime;
 
         SetCooldown();

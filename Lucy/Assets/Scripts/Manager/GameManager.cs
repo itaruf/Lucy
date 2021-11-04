@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
         LoadGame(0);
         if (maskUduinoInterface)
             GameObject.Find("UduinoInterface").SetActive(false);
+
+        foreach (PlayerData player in players)
+        {
+            player.playerScore = 0;
+        }
     }
 
 
@@ -48,15 +53,13 @@ public class GameManager : MonoBehaviour
         {
             gamesToLoad[oldGameLoaded].gameObject.SetActive(false);
         }
-            gamesToLoad[indexLoadGame].gameObject.SetActive(true);
+        gamesToLoad[indexLoadGame].gameObject.SetActive(true);
         oldGameLoaded = indexLoadGame;
     }
 
     public void LoadNextGame()
     {
         oldGameLoaded++;
-
-        Debug.Log("old" + oldGameLoaded);
         LoadGame(oldGameLoaded);
     }
 

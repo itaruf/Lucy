@@ -126,12 +126,13 @@ public class InputManager : MonoBehaviour
 
     public bool IsPlayerPressing(int playerID, string color)
     {
+        return false;
         if (color.Contains("r") || color.Contains("R"))
         {
-            if (Input.GetButtonDown("Player" + (playerID) + "Red"))
+            if (Input.GetButtonDown("Player" + (playerID+1) + "Red"))
             {
                 //inputsWaitForUp[playerID - 1].red = true;
-                Debug.Log("<color=#FF0000>Player " + playerID + "</color>");
+                Debug.Log("<color=#FF0000>Player " + (playerID+1) + "</color>");
             }
 
             return inputs[playerID - 1].red;

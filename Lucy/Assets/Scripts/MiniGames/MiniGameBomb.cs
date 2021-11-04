@@ -17,7 +17,7 @@ public class MiniGameBomb : MiniGame
     }
     void Update()
     {
-        if (InputManager.Instance.IsPlayerPressing(actualPlayer, "Red") || Input.GetButtonDown("Player" + (actualPlayer) + "Red"))
+        if (Input.GetButtonDown("Player" + (actualPlayer) + "Red"))
         {
             if (!TimerManager.Instance.timerPlay)
                 TimerManager.Instance.timerPlay = true;
@@ -45,11 +45,13 @@ public class MiniGameBomb : MiniGame
         if (isBombOnPlayer)
         {
             Debug.Log("Player " + actualPlayer + " died");
-            //Player die
+            ScoreManager.Instance.AddScore(actualPlayer, -10);
+            GameEnd();
         }
         else
         {
             Debug.Log("Bomb is not on player so no one die");
+            GameEnd();
             //NoOne die
         }
 

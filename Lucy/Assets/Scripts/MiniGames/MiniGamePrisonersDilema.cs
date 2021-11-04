@@ -87,62 +87,16 @@ public class MiniGamePrisonersDilema : MiniGame
     private Coroutine waitForPlayersInput;
     private Coroutine delayNextRound;
 
+    bool waitBeforeStart = true;
+
     void Start()
     {
-        // Initialisation de l'état de base des joueurs
-        for (int i = 0; i < GameManager.Instance.players.Length; i++)
-        {
-            GameManager.Instance.players[i].playerScore = 0;
-            playersPreviousRoundActions.Add(i + 1, false);
-
-            if (Random.Range(1, 3) == 1) // initialisation aléatoire pour forcer le joueur a joué une action
-                playersCurrentRoundActions.Add(i + 1, true);
-            else
-                playersCurrentRoundActions.Add(i + 1, false);
-            //playersCurrentRoundActions.Add(i + 1, false);
-            playerBehaviorScore.Add(i + 1, new BehaviorScores { coopScore = 0, betrayScore = 0 });
         }
-
-        int[] coopOutcomesPointsArray = {
-            coop1of4Points,
-            coop2of4Points,
-            coop3of4Points,
-            coop4of4Points,
-        };
-
-        int[] betrayOutcomesPointsArray = {
-            betray1of4Points,
-            betray2of4Points,
-            betray3of4Points,
-            betray4of4Points,
-        };
-
-        bool[] coopArray = {
-            isInCoop1of4,
-            isInCoop2of4,
-            isInCoop3of4,
-            isInCoop4of4,
-        };
-
-        bool[] betrayArray = {
-            isInBetray1of4,
-            isInBetray2of4,
-            isInBetray3of4,
-            isInBetray4of4
-        };
-
-        _coopOutcomesPoints.AddRange(coopOutcomesPointsArray);
-        _betrayOutcomesPoints.AddRange(betrayOutcomesPointsArray);
-
-        _coopOutcomes.AddRange(coopArray);
-        _betrayOutcomes.AddRange(betrayArray);
-
-        initialTimerToThink = timerToThink;
-        initialTimerBeforeStarting = timerBeforeStartingNewRound;
-    }
 
     void Update()
     {
+        if (waitBeforeStart)
+            return;
         betrayScore = behaviorScoresGlobal.betrayScore;
         coopScore = behaviorScoresGlobal.coopScore;
 
@@ -158,6 +112,7 @@ public class MiniGamePrisonersDilema : MiniGame
         else
         {
             Debug.Log("The Game is over ! GG !");
+            GameEnd();
         }
     }
 
@@ -447,6 +402,58 @@ public class MiniGamePrisonersDilema : MiniGame
     }
     protected override void LaunchGame()
     {
+        // Initialisation de l'état de base des joueurs
+        for (int i = 0; i < GameManager.Instance.players.Length; i++)
+        {
+            GameManager.Instance.players[i].playerScore = 0;
+            playersPreviousRoundActions.Add(i + 1, false);
+
+            if (Random.Range(1, 3) == 1) // initialisation aléatoire pour forcer le joueur a joué une action
+                playersCurrentRoundActions.Add(i + 1, true);
+            else
+                playersCurrentRoundActions.Add(i + 1, false);
+            //playersCurrentRoundActions.Add(i + 1, false);
+            playerBehaviorScore.Add(i + 1, new BehaviorScores { coopScore = 0, betrayScore = 0 });
+        }
+
+        int[] coopOutcomesPointsArray = {
+            coop1of4Points,
+            coop2of4Points,
+            coop3of4Points,
+            coop4of4Points,
+        };
+
+        int[] betrayOutcomesPointsArray = {
+            betray1of4Points,
+            betray2of4Points,
+            betray3of4Points,
+            betray4of4Points,
+        };
+
+        bool[] coopArray = {
+            isInCoop1of4,
+            isInCoop2of4,
+            isInCoop3of4,
+            isInCoop4of4,
+        };
+
+        bool[] betrayArray = {
+            isInBetray1of4,
+            isInBetray2of4,
+            isInBetray3of4,
+            isInBetray4of4
+        };
+
+        _coopOutcomesPoints.AddRange(coopOutcomesPointsArray);
+        _betrayOutcomesPoints.AddRange(betrayOutcomesPointsArray);
+
+        _coopOutcomes.AddRange(coopArray);
+        _betrayOutcomes.AddRange(betrayArray);
+
+        initialTimerToThink = timerToThink;
+        initialTimerBeforeStarting = timerBeforeStartingNewRound;
+
+        waitBeforeStart = false;
     }
 
     public override void TimerEnd()

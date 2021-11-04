@@ -41,11 +41,12 @@ public abstract class MiniGame : MonoBehaviour
         }
         if (waitDialogEnd)
         {
-            DialogManager.Instance.PlayDialog("WaitToPressIntroVoice");
+            DialogManager.Instance.PlayDialog(dialogToFind);
             StartCoroutine(WaitDialogEnd());
         }
         else
         {
+            Debug.Log("Start game " + miniGameName);
             LaunchGame();
         }
     }
