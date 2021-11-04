@@ -34,7 +34,7 @@ public class Kaleidoscope : MonoBehaviour
 
         //AUDIO
 
-        if(audioSource == null)
+        if(audioSource.clip == null)
         {
             for (int i = 0; i < imagesLayers.Length; i++)
             {
@@ -56,17 +56,22 @@ public class Kaleidoscope : MonoBehaviour
                 if (clamp > maxSize)
                     clamp = maxSize;
                 else if (clamp < minSize)
-                    clamp = minSize; 
+                    clamp = minSize;
+
+                clamp = Mathf.Round(clamp * 100f) / 100f;
 
                 //clamp = Mathf.Clamp(clipLoudness, minSize, maxSize);
                 for (int i = 0; i < imagesLayers.Length; i++)
                 {
+                    
                     Vector3 newScale;
                     if (multipleLayerWith[i] == 0)
                         newScale = Vector3.one;
                     else
-                        newScale = Vector3.one * clamp * multipleLayerWith[i];
-                    imagesLayers[i].localScale = Vector3.Lerp(imagesLayers[i].localScale, newScale, Time.deltaTime);
+                        newScale = Vector3.one * clamp * (1 + multipleLayerWith[i] - minSize);
+
+                    //imagesLayers[i].localScale = Vector3.Lerp(imagesLayers[i].localScale, newScale, Time.deltaTime);
+                    imagesLayers[i].localScale = newScale;
                 }
             }
         }

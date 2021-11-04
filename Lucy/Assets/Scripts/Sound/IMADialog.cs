@@ -5,7 +5,7 @@ using UnityEngine;
 public class IMADialog : MonoBehaviour
 {
     public Dialog dialog;
-    AudioSource kalei;
+    Kaleidoscope kalei;
     AudioSource source;
 
     void Start()
@@ -20,14 +20,17 @@ public class IMADialog : MonoBehaviour
         }
 
         source = GetComponent<AudioSource>();
-        kalei = FindObjectOfType<Kaleidoscope>().audioSource = source;
+        kalei = FindObjectOfType<Kaleidoscope>();
+        kalei.audioSource.clip = source.clip;
+        kalei.audioSource.volume = source.volume;
+        kalei.audioSource.Play();
     }
 
     IEnumerator TimeBeforeAction(float time)
     {
-        yield return new WaitForSeconds(time);
-        DialogManager.Instance.PlayDialog(dialog.dialogToReadAfter + dialog.delayBeforeNextClip);
-        kalei = null;
+        yield return new WaitForSeconds(time + dialog.delayBeforeNextClip);
+        DialogManager.Instance.PlayDialog(dialog.dialogToReadAfter );
+        kalei.audioSource.clip = null;
         Destroy(gameObject);
     }
 }

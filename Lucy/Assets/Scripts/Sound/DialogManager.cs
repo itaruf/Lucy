@@ -34,6 +34,6 @@ public class DialogManager : MonoBehaviour
         source2D.clip = s.clip;
         source2D.volume = s.volume;
 
-        source2D.PlayOneShot(source2D.clip);
+        //source2D.PlayOneShot(source2D.clip);
     }
 }
