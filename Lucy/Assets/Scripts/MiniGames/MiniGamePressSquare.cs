@@ -22,6 +22,8 @@ public class MiniGamePressSquare : MiniGame
             allAreGood = 0;
             for (int i = 0; i < GameManager.Instance.players.Length; i++)
             {
+                LedManager.Instance.SwitchLight(i + 1, true, !playerHasPressed[i], 0);
+
                 if (playerHasPressed[i])
                     allAreGood ++;
                 if(allAreGood == playerHasPressed.Count)

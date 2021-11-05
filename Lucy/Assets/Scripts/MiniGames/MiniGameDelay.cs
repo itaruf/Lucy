@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MiniGameDelay : MiniGame
@@ -9,9 +8,9 @@ public class MiniGameDelay : MiniGame
     protected override void LaunchGame()
     {
         ScoreManager.Instance.EnableScore(true);
+        LedManager.Instance.BlindLight(true);
         StartCoroutine(WaitTimer());
     }
-
     public override void TimerEnd()
     {
 

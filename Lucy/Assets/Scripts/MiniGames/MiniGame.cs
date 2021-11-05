@@ -39,6 +39,7 @@ public abstract class MiniGame : MonoBehaviour
             TimerManager.Instance.seconds = seconds;
             TimerManager.Instance.SetText();
         }
+            LedManager.Instance.BlindLight(false);
         if (waitDialogEnd)
         {
             DialogManager.Instance.PlayDialog(dialogToFind);

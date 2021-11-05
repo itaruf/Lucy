@@ -106,6 +106,8 @@ public class MiniGameSimon : MiniGame
 
         for (int i = 0; i < blueColor.Length; i++)
         {
+            LedManager.Instance.SwitchLight(i + 1, true, false, 0);
+            LedManager.Instance.SwitchLight(i + 1, false, false, 0);
             blueColor[i].SetActive(false);
             redColor[i].SetActive(false);
         }
@@ -134,16 +136,28 @@ public class MiniGameSimon : MiniGame
         ChangeTarget();
 
         if (colorToPress == "Red")
+        {
             redColor[playerShouldPress - 1].SetActive(true);
+            LedManager.Instance.SwitchLight(playerShouldPress, true, true, 0);
+        }
         else
+        {
+            LedManager.Instance.SwitchLight(playerShouldPress, false, true, 0);
             blueColor[playerShouldPress - 1].SetActive(true);
+        }
 
         yield return new WaitForSeconds(delayToShowSerie);
 
         if (colorToPress == "Red")
+        {
             redColor[playerShouldPress - 1].SetActive(false);
+            LedManager.Instance.SwitchLight(playerShouldPress, true, true, 0);
+        }
         else
+        {
             blueColor[playerShouldPress - 1].SetActive(false);
+            LedManager.Instance.SwitchLight(playerShouldPress, false, true, 0);
+        }
 
         yield return new WaitForSeconds(delayToUnShow);
 

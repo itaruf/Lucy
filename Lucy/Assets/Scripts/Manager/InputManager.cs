@@ -27,8 +27,8 @@ public class InputManager : MonoBehaviour
         {
             inputs[i].playerName = GameManager.Instance.players[i].playerName + " | id :" + GameManager.Instance.players[i].playerId;
             inputsWaitForUp.Add(inputs[i]);
-            LedManager.Instance.SwitchLight(i, true, true, 0);
-            LedManager.Instance.SwitchLight(i, false, true, 0);
+            //LedManager.Instance.SwitchLight(i, true, true, 0);
+            //LedManager.Instance.SwitchLight(i, false, true, 0);
         }
 
     }

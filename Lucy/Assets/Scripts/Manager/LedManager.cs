@@ -17,7 +17,13 @@ public class LedManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        SetupButton();
+        Invoke("SetupButton", 0.5f);
+
+        for (int i = 0; i < 4; i++)
+        {
+            SwitchLight(i + 1, true, false, 0);
+            SwitchLight(i + 1, false, false, 0);
+        }
 
     }
 
@@ -25,52 +31,92 @@ public class LedManager : MonoBehaviour
     {
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
-            //if (InputManager.Instance.IsPlayerPressing(i + 1, "Red"))
-            //{
-            //    LedManager.Instance.SwitchLight(i+2, "Red", true, 1);
-            //}
+            if (Input.GetButtonDown("Player" + (i+1) + "Red"))
+            {
+                Debug.Log(i+1);
+                Debug.Log("Player" + (i+1));
+                LedManager.Instance.SwitchLight((i+1), true, true, 0);
+            }
+            if (Input.GetButtonDown("Player" + (i + 1) + "Blue"))
+            {
+                Debug.Log(i + 1);
+                Debug.Log("Player" + (i + 1));
+                LedManager.Instance.SwitchLight((i + 1), false, true, 0);
+            }
         }
     }
 
     void SetupButton()
     {
-        for (int i = 0; i < 7; i++)
+        for (int i = 2; i < 10; i++)
         {
-            UduinoManager.Instance.pinMode(i, PinMode.Output);  // setup du pin 3 pour écriture
+            UduinoManager.Instance.pinMode(i, PinMode.Output);
         }
     }
 
     public void SwitchLight(int playerLight, bool isRed, bool switchOn, float timeBeforeSwitchOff)
     {
+        int index = playerLight * 2;
         if (isRed)
         {
-            int index = playerLight * 2;
-            UduinoManager.Instance.digitalWrite(index, State.HIGH);
+            if (switchOn)
+            {
+                UduinoManager.Instance.digitalWrite(index, State.HIGH);
+            }
+            else
+                UduinoManager.Instance.digitalWrite(index, State.LOW);
         }
         else
         {
-            int index = playerLight * 2 + 1;
-            UduinoManager.Instance.digitalWrite(index, State.HIGH);
+            index++;
+            if (switchOn)
+                UduinoManager.Instance.digitalWrite(index, State.HIGH);
+            else
+                UduinoManager.Instance.digitalWrite(index, State.LOW);
         }
+        Debug.Log("I switch light " + index);
 
         if (timeBeforeSwitchOff > 0 && switchOn)
-            StartCoroutine(WaitForSwitchOff(playerLight, isRed, timeBeforeSwitchOff));
+            StartCoroutine(WaitForSwitchOff(index, isRed, timeBeforeSwitchOff));
     }
 
-    IEnumerator WaitForSwitchOff(int playerLight, bool isRed, float time)
+    IEnumerator WaitForSwitchOff(int index, bool isRed, float time)
     {
-        playerLight--;
         yield return new WaitForSeconds(time);
         if (isRed)
         {
-            int index = playerLight * 2;
             UduinoManager.Instance.digitalWrite(index, State.LOW);
         }
         else
         {
-            int index = playerLight * 2 + 1;
             UduinoManager.Instance.digitalWrite(index, State.LOW);
         }
 
+    }
+
+    public void BlindLight(bool blind)
+    {
+        if (blind)
+        {
+            //StartCoroutine(Blind());
+        }
+        else
+        {
+            StopAllCoroutines();
+        }
+    }
+
+    IEnumerator Blind()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (i > 3)
+                LedManager.Instance.SwitchLight(i + 1, false, true, 0.4f);
+            else
+                LedManager.Instance.SwitchLight(i + 1, true, true, 0.4f);
+            yield return new WaitForSeconds(0.5f);
+            Debug.Log(i + 1);
+        }
+        StartCoroutine(Blind());
     }
 }

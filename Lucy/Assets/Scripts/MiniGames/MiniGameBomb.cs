@@ -14,17 +14,20 @@ public class MiniGameBomb : MiniGame
         TimerManager.Instance.timerPlay = true;
         actualPlayer = Random.Range(1, 5);
         bombToShow[actualPlayer - 1].SetActive(true);
+        LedManager.Instance.SwitchLight(actualPlayer, true, true, 0);
     }
     void Update()
     {
-        if (Input.GetButtonDown("Player" + (actualPlayer) + "Red"))
+        Debug.Log(actualPlayer);
+        if (actualPlayer !=0 && Input.GetButtonDown("Player" + (actualPlayer) + "Red"))
         {
             if (!TimerManager.Instance.timerPlay)
                 TimerManager.Instance.timerPlay = true;
 
-            foreach (GameObject item in bombToShow)
+            for (int i = 0; i < GameManager.Instance.players.Length; i++)
             {
-                item.SetActive(false);
+                LedManager.Instance.SwitchLight(i + 1, true, false, 0);
+                //item.SetActive(false);
             }
             StartCoroutine(ChangePlayer());
         }
@@ -38,7 +41,8 @@ public class MiniGameBomb : MiniGame
         actualPlayer++;
         if (actualPlayer > 4)
             actualPlayer -= 4;
-            bombToShow[actualPlayer - 1].SetActive(true);
+        LedManager.Instance.SwitchLight(actualPlayer, true, true, 0);
+        //bombToShow[actualPlayer - 1].SetActive(true);
     }
     public override void TimerEnd()
     {
