@@ -149,15 +149,6 @@ public class MiniGamePrisonersDilema : MiniGame
         StartCoroutine(GameIntroduction());*/
     }
 
-    IEnumerator GameIntroduction()
-    {
-        Debug.Log("The Game is about to begin...");
-        yield return new WaitForSeconds(3f);
-        Debug.Log("... Now !");
-        canVote = true;
-        waitBeforeStart = false;
-    }
-
     void Update()
     {
         if (waitBeforeStart)
@@ -189,6 +180,13 @@ public class MiniGamePrisonersDilema : MiniGame
                     if (canVote)
                     {
                         canVote = false;
+
+                        // Désactiver les leds
+                        for (int i = 0; i < GameManager.Instance.players.Length; i++)
+                        {
+                            LedManager.Instance.SwitchLight(i + 1, true, false, 0);
+                            LedManager.Instance.SwitchLight(i + 1, false, false, 0);
+                        }
 
                         DetermineBehaviorScoresToEnable();
                         DeterminePlayerScore();
@@ -257,7 +255,8 @@ public class MiniGamePrisonersDilema : MiniGame
         initialTimerToThink = timerToThink;
         initialTimerBeforeStarting = timerBeforeStartingNewRound;
 
-        StartCoroutine(GameIntroduction());
+        waitBeforeStart = false;
+        canVote = true;
     }
 
     void ChooseAction() // Choisir de trahir ou non
@@ -265,6 +264,13 @@ public class MiniGamePrisonersDilema : MiniGame
         if (!canVote) return;
         //Debug.Log("Choose Action");
         InputManager input = InputManager.Instance;
+
+        // Activer les leds
+        for (int i = 0; i < GameManager.Instance.players.Length; i++)
+        {
+            LedManager.Instance.SwitchLight(i + 1, true, true, 0);
+            LedManager.Instance.SwitchLight(i + 1, false, true, 0);
+        }
 
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {

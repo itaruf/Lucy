@@ -511,7 +511,7 @@ MonoBehaviour:
   - name: SimonIntroVoice
     clip: {fileID: 8300000, guid: 09a2adbf69a3aeb4b94ea970122d3fff, type: 3}
     volume: 1
-    dialogToReadAfter: 
+    dialogToReadAfter: SimonStartVoice
     delayBeforeNextClip: 0.3
   - name: SimonStartVoice
     clip: {fileID: 8300000, guid: fe1c387232b79594cb529a3cb0451e64, type: 3}
@@ -521,7 +521,7 @@ MonoBehaviour:
   - name: VotetIntroVoice
     clip: {fileID: 8300000, guid: 0ea901388b972754ba2f64456835cd62, type: 3}
     volume: 1
-    dialogToReadAfter: 
+    dialogToReadAfter: VoteStartVoice
     delayBeforeNextClip: 0.3
   - name: VoteStartVoice
     clip: {fileID: 8300000, guid: a5e81e7719d29fe468445b7b9708e816, type: 3}
@@ -2001,8 +2001,8 @@ MonoBehaviour:
   timerNeeded: 1
   minutes: 0
   seconds: 29
-  waitDialogEnd: 0
-  dialogToFind: 
+  waitDialogEnd: 1
+  dialogToFind: BombIntroVoice
   delayBeforeNextPlayer: 1
   bombToShow:
   - {fileID: 1152669525}
@@ -3263,8 +3263,8 @@ MonoBehaviour:
   timerNeeded: 0
   minutes: 0
   seconds: 5
-  waitDialogEnd: 0
-  dialogToFind: 
+  waitDialogEnd: 1
+  dialogToFind: PrisonnerIntroVoice
   numberOfRounds: 3
   currentRound: 1
   timerToThink: 8
@@ -3848,8 +3848,8 @@ MonoBehaviour:
   timerNeeded: 0
   minutes: 0
   seconds: 0
-  waitDialogEnd: 0
-  dialogToFind: 
+  waitDialogEnd: 1
+  dialogToFind: SimonIntroVoice
   seriesNum: 040000000600000008000000
   delayToShowSerie: 1
   delayToUnShow: 0.25
@@ -4046,8 +4046,8 @@ MonoBehaviour:
   timerNeeded: 1
   minutes: 0
   seconds: 15
-  waitDialogEnd: 0
-  dialogToFind: 
+  waitDialogEnd: 1
+  dialogToFind: VotetIntroVoice
   voteFor: 
 --- !u!1 &1662265811
 GameObject:
