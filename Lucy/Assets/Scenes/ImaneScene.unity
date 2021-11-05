@@ -491,7 +491,7 @@ MonoBehaviour:
   - name: PrisonnerIntroVoice
     clip: {fileID: 8300000, guid: 55250483697da184fbf92914b8b87b0b, type: 3}
     volume: 1
-    dialogToReadAfter: PrisonnerStartVoice
+    dialogToReadAfter: 
     delayBeforeNextClip: 0.3
   - name: PrisonnerStartVoice
     clip: {fileID: 8300000, guid: 73a66afe14be70444a9d9ad2933b01c0, type: 3}
@@ -3265,11 +3265,11 @@ MonoBehaviour:
   seconds: 5
   waitDialogEnd: 1
   dialogToFind: PrisonnerIntroVoice
-  numberOfRounds: 3
+  numberOfRounds: 10
   currentRound: 1
   timerToThink: 8
-  timerBeforeStartingNewRound: 8
-  scorePopUpDuration: 5
+  timerBeforeStartingNewRound: 12
+  scorePopUpDuration: 12
   text: {fileID: 1239435442}
   textBeforeNumb: 
   playersScoresPopup:
