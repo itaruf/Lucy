@@ -80,6 +80,7 @@ public class MiniGameSimon : MiniGame
         {
             rand = Random.Range(1, 5);
         }
+        Debug.Log(rand);
         ScoreManager.Instance.AddScore(rand, -3);
         GameEnd();
     }
@@ -151,12 +152,12 @@ public class MiniGameSimon : MiniGame
         if (colorToPress == "Red")
         {
             redColor[playerShouldPress - 1].SetActive(false);
-            LedManager.Instance.SwitchLight(playerShouldPress, true, true, 0);
+            LedManager.Instance.SwitchLight(playerShouldPress, true, false, 0);
         }
         else
         {
             blueColor[playerShouldPress - 1].SetActive(false);
-            LedManager.Instance.SwitchLight(playerShouldPress, false, true, 0);
+            LedManager.Instance.SwitchLight(playerShouldPress, false, false, 0);
         }
 
         yield return new WaitForSeconds(delayToUnShow);

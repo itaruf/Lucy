@@ -31,7 +31,6 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int playerNum, int scoreToAdd)
     {
-        Debug.Log(playerNum);
         PlayerData playerData = GameManager.Instance.players[playerNum];
 
         playerData.playerScore += scoreToAdd;

@@ -17,6 +17,8 @@ public class MiniGameVote : MiniGame
         for (int i = 0; i < GameManager.Instance.players.Length; i++)
         {
             voteFor.Add(0);
+            LedManager.Instance.SwitchLight(i+1, true, true, 0);
+            LedManager.Instance.SwitchLight(i+1, false, true, 0);
         }
     }
 
@@ -76,6 +78,12 @@ public class MiniGameVote : MiniGame
             ScoreManager.Instance.AddScore(voteFor[i]-1, -2);
         }
 
+        for (int i = 0; i < GameManager.Instance.players.Length; i++)
+        {
+            voteFor.Add(0);
+            LedManager.Instance.SwitchLight(i + 1, true, false, 0);
+            LedManager.Instance.SwitchLight(i + 1, false, false, 0);
+        }
         GameEnd();
     }
 

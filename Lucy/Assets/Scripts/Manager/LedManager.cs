@@ -74,7 +74,6 @@ public class LedManager : MonoBehaviour
             else
                 UduinoManager.Instance.digitalWrite(index, State.LOW);
         }
-        Debug.Log("I switch light " + index);
 
         if (timeBeforeSwitchOff > 0 && switchOn)
             StartCoroutine(WaitForSwitchOff(index, isRed, timeBeforeSwitchOff));
@@ -98,7 +97,7 @@ public class LedManager : MonoBehaviour
     {
         if (blind)
         {
-            //StartCoroutine(Blind());
+            StartCoroutine(Blind());
         }
         else
         {
@@ -108,14 +107,13 @@ public class LedManager : MonoBehaviour
 
     IEnumerator Blind()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 2; i < 11; i++)
         {
             if (i > 3)
                 LedManager.Instance.SwitchLight(i + 1, false, true, 0.4f);
             else
                 LedManager.Instance.SwitchLight(i + 1, true, true, 0.4f);
             yield return new WaitForSeconds(0.5f);
-            Debug.Log(i + 1);
         }
         StartCoroutine(Blind());
     }

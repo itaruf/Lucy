@@ -4607,12 +4607,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniGameName: Simon
   howToScore: 0
-  timerNeeded: 1
+  timerNeeded: 0
   minutes: 0
   seconds: 50
   waitDialogEnd: 0
   dialogToFind: 
-  seriesNum: 040000000600000008000000
+  seriesNum: 040000000400000006000000
   delayToShowSerie: 1
   delayToUnShow: 0.25
   buttonToPress: []
@@ -11131,11 +11131,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec584b4fd6e1e2c4e8ac5d4fa552811d, type: 2}
   - {fileID: 11400000, guid: 31e15719029a42f4c9ff807c72f6fbfd, type: 2}
   gamesToLoad:
+  - {fileID: 1123542668}
+  - {fileID: 1652025382}
   - {fileID: 1554251917}
   - {fileID: 1007695495}
-  - {fileID: 1123542668}
   - {fileID: 28675917}
-  - {fileID: 1652025382}
   - {fileID: 28675917}
   - {fileID: 28675917}
   - {fileID: 1188445489}

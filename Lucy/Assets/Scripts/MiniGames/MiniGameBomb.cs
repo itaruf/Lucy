@@ -18,7 +18,6 @@ public class MiniGameBomb : MiniGame
     }
     void Update()
     {
-        Debug.Log(actualPlayer);
         if (actualPlayer !=0 && Input.GetButtonDown("Player" + (actualPlayer) + "Red"))
         {
             if (!TimerManager.Instance.timerPlay)
