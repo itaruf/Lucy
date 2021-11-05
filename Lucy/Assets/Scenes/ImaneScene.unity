@@ -423,6 +423,7 @@ MonoBehaviour:
   - {fileID: 1732389798}
   - {fileID: 1026730968}
   - {fileID: 1812774173}
+  scoreTxt: []
   scoreByRank: 00000000000000000000000000000000
 --- !u!4 &53462688
 Transform:
@@ -482,9 +483,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogs:
-  - name: KaleidoTest
-    clip: {fileID: 8300000, guid: 35e071cdce87ad445b3c9c19a9324f63, type: 3}
-    volume: 0
+  - name: WaitToPressIntroVoice
+    clip: {fileID: 8300000, guid: 26955eb4530b82744aa25a0783ca3e73, type: 3}
+    volume: 1
+    dialogToReadAfter: 
+    delayBeforeNextClip: 0.3
+  - name: PrisonnerIntroVoice
+    clip: {fileID: 8300000, guid: 55250483697da184fbf92914b8b87b0b, type: 3}
+    volume: 1
+    dialogToReadAfter: PrisonnerStartVoice
+    delayBeforeNextClip: 0.3
+  - name: PrisonnerStartVoice
+    clip: {fileID: 8300000, guid: 73a66afe14be70444a9d9ad2933b01c0, type: 3}
+    volume: 1
+    dialogToReadAfter: 
+    delayBeforeNextClip: 0.3
+  - name: BombIntroVoice
+    clip: {fileID: 8300000, guid: ea810671a90d7e148a148e6c5191428e, type: 3}
+    volume: 1
+    dialogToReadAfter: BombStartVoice
+    delayBeforeNextClip: 0.3
+  - name: BombStartVoice
+    clip: {fileID: 8300000, guid: be400eb35e04ff64b86eb8ef7c02e76f, type: 3}
+    volume: 1
+    dialogToReadAfter: 
+    delayBeforeNextClip: 0.3
+  - name: SimonIntroVoice
+    clip: {fileID: 8300000, guid: 09a2adbf69a3aeb4b94ea970122d3fff, type: 3}
+    volume: 1
+    dialogToReadAfter: 
+    delayBeforeNextClip: 0.3
+  - name: SimonStartVoice
+    clip: {fileID: 8300000, guid: fe1c387232b79594cb529a3cb0451e64, type: 3}
+    volume: 1
+    dialogToReadAfter: 
+    delayBeforeNextClip: 0.3
+  - name: VotetIntroVoice
+    clip: {fileID: 8300000, guid: 0ea901388b972754ba2f64456835cd62, type: 3}
+    volume: 1
+    dialogToReadAfter: 
+    delayBeforeNextClip: 0.3
+  - name: VoteStartVoice
+    clip: {fileID: 8300000, guid: a5e81e7719d29fe468445b7b9708e816, type: 3}
+    volume: 1
     dialogToReadAfter: 
     delayBeforeNextClip: 0.3
   soundPrefab: {fileID: 3862785304920429047, guid: 203d6fd096be5624eb1be7ce830d2029, type: 3}
@@ -1769,6 +1810,8 @@ MonoBehaviour:
   timerNeeded: 1
   minutes: 1
   seconds: 30
+  waitDialogEnd: 0
+  dialogToFind: 
   numbersToReach: 040000000800000008000000
   delayBeforeChangeNumber: 0
   playersScore: 00000000000000000000000000000000
@@ -1958,6 +2001,8 @@ MonoBehaviour:
   timerNeeded: 1
   minutes: 0
   seconds: 29
+  waitDialogEnd: 0
+  dialogToFind: 
   delayBeforeNextPlayer: 1
   bombToShow:
   - {fileID: 1152669525}
@@ -3218,6 +3263,8 @@ MonoBehaviour:
   timerNeeded: 0
   minutes: 0
   seconds: 5
+  waitDialogEnd: 0
+  dialogToFind: 
   numberOfRounds: 3
   currentRound: 1
   timerToThink: 8
@@ -3801,6 +3848,8 @@ MonoBehaviour:
   timerNeeded: 0
   minutes: 0
   seconds: 0
+  waitDialogEnd: 0
+  dialogToFind: 
   seriesNum: 040000000600000008000000
   delayToShowSerie: 1
   delayToUnShow: 0.25
@@ -3997,6 +4046,8 @@ MonoBehaviour:
   timerNeeded: 1
   minutes: 0
   seconds: 15
+  waitDialogEnd: 0
+  dialogToFind: 
   voteFor: 
 --- !u!1 &1662265811
 GameObject:
@@ -4823,6 +4874,7 @@ MonoBehaviour:
   - {fileID: 117680719}
   - {fileID: 609155268}
   - {fileID: 441972727}
+  imagesFeedback: []
   speed: 0.3
   multipleLayerWith:
   - 0
@@ -4837,6 +4889,7 @@ MonoBehaviour:
   audioSource: {fileID: 1937275939}
   updateStep: 0.1
   sampleDataLength: 1024
+  particle: {fileID: 0}
 --- !u!82 &1937275939
 AudioSource:
   m_ObjectHideFlags: 0
