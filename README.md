@@ -15,4 +15,4 @@ Main work done :
 
 - Musics & Sounds
 - Mini-games
-- Connect the alternatives controllers to Unity
+- Connect the alternative controllers to Unity
